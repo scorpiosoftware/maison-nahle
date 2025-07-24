@@ -22,7 +22,7 @@
             ],
         ]">
     </div>
-    <div class="mx-auto max-w-screen-xl p-4 mt-4 bg-gradient-to-b from-pink-500 via-purple-600 to-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl">
+    <div class="mx-auto max-w-screen-xl p-4 mt-4  rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <!-- Image Gallery Section -->
             <div class="relative">
@@ -209,7 +209,7 @@
                     </div>
 
                     <button type="submit"
-                        class="px-6 py-3 bg-[#2B3467] text-white rounded-lg hover:bg-[#1a1f3d] transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
                         {{ session('lang') == 'en' ? 'Submit Review' : 'إرسال التقييم' }}
                     </button>
                 </div>

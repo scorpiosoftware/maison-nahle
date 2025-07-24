@@ -59,8 +59,8 @@
                             <label for="size_{{ $size->id }}"
                                    class="flex items-center justify-center w-12 h-12 rounded-lg cursor-pointer
                                           bg-white border-2 border-gray-200 transition-all duration-300
-                                          peer-checked:border-[#2B3467] peer-checked:bg-[#2B3467] peer-checked:text-white
-                                          hover:border-[#2B3467] hover:shadow-md">
+                                          peer-checked:border-gray-500 peer-checked:bg-gray-500 peer-checked:text-white
+                                          hover:border-gray-500 hover:shadow-md">
                                 {{ $size->name }}
                             </label>
                         </div>
@@ -109,8 +109,8 @@
                     {{ session('lang') == 'en' ? 'Add to Cart' : 'أضف إلى السلة' }}
                 </h3>
                 <button type="button" wire:click="addToCart"
-                    class="w-full bg-[#2B3467] text-white px-8 py-3 rounded-lg 
-                           hover:bg-[#1a1f3d] transition-all duration-300 transform hover:scale-105 
+                    class="w-full bg-gray-500 text-white px-8 py-3 rounded-lg 
+                           hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 
                            hover:shadow-lg flex items-center justify-center space-x-2">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 576 512">
                         <path

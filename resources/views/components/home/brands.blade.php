@@ -8,14 +8,14 @@
         
         <div class="w-24 h-1 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 mx-auto mb-16 rounded-full"></div>
         
-        <div class="brands-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 mt-8">
+        <div class="brands-grid {{ $brands->count() > 1 ? 'flex' : '' }}  md:gap-8 mt-8">
             @foreach ($brands as $brand)
-                <div class="brand-card opacity-0 transform translate-y-4" 
+                <div class="brand-card w-60 mx-auto opacity-0 transform translate-y-4" 
                     style="animation: fadeInUp 0.6s ease forwards {{ 1 * 0.15 }}s">
-                    <div class="relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 p-4">
+                    <div class="relative overflow-hidden rounded-xl  shadow-lg hover:shadow-xl transition-all duration-300 p-4 bg-gray-500" >
                         <div class="skeleton-loader absolute inset-0 bg-gray-200 dark:bg-gray-700"></div>
-                        <div class="aspect-square w-full h-full flex items-center justify-center">
-                            <div class="w-32 h-32 relative flex items-center justify-center">
+                        <div class="aspect-square w-full h-full  flex items-center justify-center">
+                            <div class="relative flex items-center justify-center">
                                 <img 
                                     class="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105" 
                                     src="{{ URL::to('storage/' . $brand->image_url) }}" 
@@ -27,6 +27,7 @@
                         </div>
                     </div>
                 </div>
+
             @endforeach
         </div>
     </div>

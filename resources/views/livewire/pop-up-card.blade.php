@@ -10,7 +10,7 @@
             <p class="text-2xl font-extrabold text-gray-800 tracking-tight">
                 {{ session('lang') == 'en' ? 'Quick Search' : 'بحث سريع' }}
             </p>
-            <div class="mt-2 w-12 h-1 bg-[#f8578c] mx-auto rounded-full"></div>
+            <div class="mt-2 w-12 h-1 bg-gray-500 mx-auto rounded-full"></div>
         </div>
 
         <div class="flex justify-between items-center gap-6 mb-8">
@@ -20,10 +20,10 @@
                 </label>
                 <div class="relative">
                     <input type="text" 
-                           class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f8578c] focus:border-transparent placeholder-gray-400 transition-all"
+                           class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent placeholder-gray-400 transition-all"
                            name="min_price"
                            id="min_price"
-                           placeholder="{{ session('lang') == 'en' ? 'IQD' : 'د.ع' }}">
+                           placeholder="{{ session('lang') == 'en' ? '$' : '$' }}">
                 </div>
             </div>
             
@@ -33,17 +33,17 @@
                 </label>
                 <div class="relative">
                     <input type="text" 
-                           class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f8578c] focus:border-transparent placeholder-gray-400 transition-all"
+                           class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent placeholder-gray-400 transition-all"
                            name="max_price"
                            id="max_price"
-                           placeholder="{{ session('lang') == 'en' ? 'IQD' : 'د.ع' }}">
+                           placeholder="{{ session('lang') == 'en' ? '$' : '$' }}">
                 </div>
             </div>
         </div>
 
         <div class="flex items-center justify-between gap-4">
             <button type="submit"
-                class="flex-1 px-6 py-3.5 bg-[#f8578c] text-white font-semibold rounded-lg hover:bg-[#e54a7a] transition-colors duration-300 transform hover:scale-[1.02] shadow-md">
+                class="flex-1 px-6 py-3.5 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors duration-300 transform hover:scale-[1.02] shadow-md">
                 {{ session('lang') == 'en' ? 'Search' : 'ابحث' }}
             </button>
             

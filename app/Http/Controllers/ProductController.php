@@ -20,6 +20,7 @@ use App\Models\Size;
 use App\Models\StoreSections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\Input;
 
 class ProductController extends Controller

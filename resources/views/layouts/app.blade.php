@@ -38,7 +38,7 @@
         <x-dashboard.dashboard />
         <!-- Page Content -->
         <main>
-            <div class="p-4 sm:ml-64 mt-10 rtl:sm:mr-64 rtl:sm:ml-0">
+            <div class="container mx-auto max-w-6xl mt-20">
                 <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg rtl:text-right">
                     {{ $slot }}
                 </div>

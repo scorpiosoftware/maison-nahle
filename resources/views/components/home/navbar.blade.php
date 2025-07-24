@@ -1,13 +1,14 @@
-<nav class="bg-[#9e01a1] shadow-lg z-50 wowDiv nav-bar" id="wowDiv" data-animation="animate__fadeInDown"
+<nav class="bg-gray-500 bg-gradient-to-t shadow-lg z-50 wowDiv nav-bar" id="wowDiv" data-animation="animate__fadeInDown"
     data-delay="300">
-    <div class="max-w-screen-2xl px-4 mx-auto py-4">
+    
+    <div class="max-w-screen-4xl px-4 mx-auto py-4">
         <div class="flex items-center justify-between gap-x-6">
             <div class="hidden md:block">
                 <livewire:language>
             </div>
             <!-- Logo Section -->
             <div class="md:flex md:items-center mx-auto w-1/2 justify-center">
-                <a href="/" class="flex items-center gap-2 group relative overflow-hidden bg-white backdrop-blur-sm rounded-lg px-4 py-2 shadow-sm">
+                <a href="/" class="flex items-center gap-2 group relative overflow-hidden bg-transparent backdrop-blur-sm rounded-lg px-4 py-2">
                     @if ($carousel->logo_url)
                         <div class="w-60 h-16 mx-auto overflow-hidden transition-all duration-300 hover:scale-105">
                             <img src="{{ asset('storage/' . $carousel->logo_url) }}" 
@@ -26,8 +27,8 @@
             <div>
                 <div class="w-full mx-auto text-center ">
                     <button data-collapse-toggle="mobile-menu"
-                        class="lg:hidden p-2.5  border-2  border-white rounded-lg w-full transition-colors">
-                        <img class="w-6" src="{{ asset('media/icons/menu.png') }}" alt="">
+                        class="lg:hidden p-2.5  bg-white rounded-lg w-full transition-colors">
+                   <i class="fa fa-bars text-lg"></i>
                     </button>
                 </div>
                 <!-- Mobile Menu -->
@@ -37,7 +38,7 @@
             <div x-data="{ open: false }" class="hidden md:flex justify-start items-start gap-x-4 ">
                 <button @click="open = !open"
                     class=" p-2.5 bg-white transition-all duration-300 hover:scale-90  rounded-lg ">
-                    {{-- <img class="w-6" src="{{ asset('media/icons/menu.png') }}" alt=""> --}}
+  
                       <i class="fa fa-bars text-lg"></i>
                 </button>
                 <!-- Action Icons -->
@@ -133,34 +134,11 @@
     </div>
     <div id="mobile-menu" class="lg:hidden mt-4 hidden">
         <div class="pt-4 border-t border-gray-800">
-            <!-- Search Form -->
-            {{-- <form action="{{ route('filter.products') }}" method="POST"
-                class="md:hidden flex flex-1 max-w-2xl  transition-all delay-75 hover:scale-90"
-                data-animation="animate__bounceInDown" data-delay="100">
-                @csrf
-                <div class="relative w-full">
-                    <input type="text" name="search" id="simple-search"
-                        class="w-full pl-12 pr-4 py-3 bg-white border border-gray-700 rounded-lg 
-                               text-[#ec5793] font-serif placeholder-gray-400 hover:placeholder-[#ec5793]
-                                focus:ring-2 focus:ring-[#5f9e9d] focus:outline-none focus:border-transparent transition-all "
-                        placeholder=" {{ session('lang') == 'en' ? 'Search Products' : '... البحث عن المنتجات' }}" />
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-4">
-                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                </div>
-                <button type="submit"
-                    class="ml-2 px-6 py-3 bg-white text-[#ec5793] font-serif 
-                               rounded-lg transition-colors duration-200 shadow-sm  focus:ring-2 focus:ring-[#5f9e9d] focus:outline-none">
-                    {{ session('lang') == 'en' ? 'Search' : 'بحث' }}
-                </button>
-            </form> --}}
+
             <div x-data="{ open: false }" class=" md:flex justify-start items-start gap-x-4 ">
                 <button @click="open = !open"
                     class=" p-2.5 bg-white transition-all w-full mx-auto duration-300 hover:scale-90  rounded-lg ">
-                    <img class="w-6 mx-auto" src="{{ asset('media/icons/menu.png') }}" alt="">
+                    <i class="fa fa-bars text-lg"></i>
                 </button>
                 <!-- Action Icons -->
                 <div class="flex justify-center items-center gap-4 " x-cloak x-show="open"

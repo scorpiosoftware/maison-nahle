@@ -20,8 +20,8 @@ class LocalizationControll
             App::setLocale('ar');
         } else {
             session()->forget('lang');
-            session()->put('lang', 'ar');
-            App::setLocale('ar');
+            session()->put('lang', 'en');
+            App::setLocale('en');
         }
     }
 }

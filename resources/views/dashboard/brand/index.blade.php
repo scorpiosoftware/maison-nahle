@@ -71,9 +71,9 @@
             <tbody>
                 @foreach ($records as $record)
                     <tr class="bg-white border-b d:bg-gray-800 d:border-gray-700">
-                        <th scope="row" class="p-2 text-gray-900  d:text-white">
+                        <th scope="row" class="p-2 text-gray-900   d:text-white">
                             <img src="{{ URL::to('storage/' . $record->image_url) }}" alt=""
-                                class="rounded-md w-24 md:w-20 shadow-lg ">
+                                class="rounded-md w-24 md:w-24 shadow-lg bg-gray-500 p-2 ">
                         </th>
 
                         <td class="px-6 py-4 font-extrabold whitespace-nowrap text-black text-base">

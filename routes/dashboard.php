@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProductViewController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\StoreSectionController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\App;
@@ -31,6 +32,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::resource('carousel', CarouselController::class);
     Route::resource('inbox', InboxController::class);
     Route::resource('storeSections', StoreSectionController::class);
+    Route::resource('social', SocialController::class);
     Route::resource('branch', BranchController::class);
     Route::resource('color', ColorController::class);
     Route::resource('size', SizeController::class);

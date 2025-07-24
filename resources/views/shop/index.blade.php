@@ -1,31 +1,4 @@
-{{-- @extends('layouts.home') --}}
-{{-- @section('content') --}}
-{{-- <div class="md:max-w-4xl mx-auto pt-4">
-        <livewire:breadcrumb :links="[
-            [
-                'path' => '/',
-                'name_en' => 'Home',
-                'name_ar' => 'الصفحة الرئيسية',
-            ],
-            [
-                'path' => '/shop',
-                'name_en' => 'Catalog',
-                'name_ar' => 'المنتجات',
-            ],
-        ]">
 
-            @livewire('shop', [
-                'categories' => \App\Models\Category::all(),
-                'minPrice' => $inputs['min_price'] ?? null,
-                'maxPrice' => $inputs['max_price'] ?? null,
-            ])
-
-    </div> --}}
-
-{{-- <nav aria-label="Page navigation example" class="p-4 w-1/4 mx-auto">
-        {{ $products->links() }}
-    </nav> --}}
-{{-- @endsection --}}
 @extends('layouts.home')
 @section('content')
     <!-- drawer init and toggle -->
@@ -56,28 +29,7 @@
                         </option>
                     </select>
                 </div>
-                {{-- <div class="border p-2">
-                    <div class="border p-2">
-                        <h1> {{ session('lang') == 'en' ? 'colors' : 'ألوان' }}</h1>
-                        <div class="grid grid-cols-3 gap-4 items-center justify-items-center max-w-40 mx-auto">
 
-                            @foreach ($colors as $color)
-                                <div class="items-center flex justify-stretch gap-x-4">
-                                    <input type="checkbox" value="{{ $color->id }}" name="color_id[]"
-                                        class="rounded-full box-border size-6 p-2 hover:border bg-[{!! $color->hex_code !!}]"
-                                        style="background-color: {!! $color->hex_code !!}"
-                                        @if (!empty(request()->input('color_id'))) @foreach (request()->input('color_id') as $index)
-                                    @if ($index == $color->id)
-                                    checked
-                                    @break @endif
-                                        @endforeach
-                            @endif
-                            />
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-        </div> --}}
                 <div class="border p-2">
                     <div class="border p-2">
                         <h1>{{ session('lang') == 'en' ? 'Categories' : 'فئات' }}</h1>
@@ -377,7 +329,7 @@
                 ],
             ]">
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-10 md:px-0 mt-2">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-10 md:px-0 mt-2">
             @if ($products->count() <= 0)
                 <div class="text-center flex items-center justify-center w-full">
                     {{ session('lang') == 'en' ? 'No results found' : 'لم يتم العثور على نتائج' }}</div>
