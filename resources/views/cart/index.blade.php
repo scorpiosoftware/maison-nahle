@@ -24,7 +24,7 @@
 
                                             <div class="text-end md:order-4 md:w-32">
                                                 <p class="text-base font-bold text-gray-900 dark:text-white">
-                                                    د.ع {{ $details['price'] }}</p>
+                                                    $ {{ $details['price'] }}</p>
                                             </div>
                                         </div>
 
@@ -112,13 +112,13 @@
                                     class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                                     <dt class="text-base font-bold text-gray-900 dark:text-white">
                                         {{ session('lang') == 'en' ? 'Total' : 'المجموع' }} </dt>
-                                    <dd class="text-base font-bold text-gray-900 dark:text-white">د.ع {{ $totale }}
+                                    <dd class="text-base font-bold text-gray-900 dark:text-white">$ {{ $totale }}
                                     </dd>
                                 </dl>
                             </div>
 
                             <a href="{{ route('address') }}"
-                                class="flex w-full items-center justify-center rounded-lg bg-green-400 border-2 px-5 py-2.5 text-sm font-medium text-white  focus:outline-none focus:ring-4">{{ session('lang') == 'en' ? 'Confirm order' : 'تاكيد الطلب' }}</a>
+                                class="flex w-full items-center justify-center rounded-lg bg-white border-2 px-5 py-2.5 text-sm font-medium text-black  focus:outline-none focus:ring-4">{{ session('lang') == 'en' ? 'Confirm order' : 'تاكيد الطلب' }}</a>
 
                             <div class="flex items-center justify-center gap-2">
                                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">

@@ -62,11 +62,11 @@
 
         <div class="flex items-center justify-center space-x-2">
             <span class="@if (!empty($item->offer_price)) line-through text-sm text-red-500 @else text-[#ec5793] font-semibold @endif">
-                {{session('lang') == 'en' ? 'IQD' : 'د.ع'}} {{ $item->price }}
+                {{session('lang') == 'en' ? '$' : '$'}} {{ $item->price }}
             </span>
             @if (!empty($item->offer_price))
                 <div class="rounded-lg bg-[#ec5793] bg-opacity-10 px-3 py-1 text-sm font-bold text-[#ec5793]">
-                    {{session('lang') == 'en' ? 'IQD' : 'د.ع'}} {{ $item->offer_price }}
+                    {{session('lang') == 'en' ? '$' : '$'}} {{ $item->offer_price }}
                 </div>
             @endif
         </div>

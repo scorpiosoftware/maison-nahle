@@ -46,12 +46,12 @@
                             <li
                                 class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 hover:bg-white hover:shadow-lg">
                                 <a href=""
-                                    class="hover:text-purple-600 transition-colors duration-300">{{ session('lang') == 'en' ? 'About us' : 'حول الشركة' }}</a>
+                                    class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'About us' : 'حول الشركة' }}</a>
                             </li>
                             <li
                                 class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 hover:bg-white hover:shadow-lg">
                                 <a href="/contactUs"
-                                    class="hover:text-purple-600 transition-colors duration-300">{{ session('lang') == 'en' ? 'Contact Us' : 'تواصل معنا' }}</a>
+                                    class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'Contact Us' : 'تواصل معنا' }}</a>
                             </li>
                         </ul>
                     </div>
@@ -60,29 +60,29 @@
                     <div class="transform transition-all duration-300 hover:scale-105">
                         <h2 class="mb-6 text-sm font-semibold uppercase text-white tracking-wider">
                             {{ session('lang') == 'en' ? 'Legal' : 'القوانين' }}</h2>
-                        <ul class="text-[#9e01a1] font-medium space-y-3">
+                        <ul class="text-black font-medium space-y-3">
                             <li
                                 class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 hover:bg-white hover:shadow-lg">
                                 <a href="/privacy-policy"
-                                    class="hover:text-purple-600 transition-colors duration-300">{{ session('lang') == 'en' ? 'Privacy Policy' : 'سياسة الخصوصية' }}</a>
+                                    class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'Privacy Policy' : 'سياسة الخصوصية' }}</a>
                             </li>
                             <li
                                 class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 hover:bg-white hover:shadow-lg">
                                 <a href=""
-                                    class="hover:text-purple-600 transition-colors duration-300">{{ session('lang') == 'en' ? 'Terms & Conditions' : 'الشروط والأحكام' }}</a>
+                                    class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'Terms & Conditions' : 'الشروط والأحكام' }}</a>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Social Media Section -->
-                    <div class="transform transition-all duration-300 hover:scale-105 group relative z-50">
+                    <div class="transform transition-all duration-300 hover:scale-105 group relative z-0">
                         <h2 class="mb-6 text-sm font-semibold uppercase text-white tracking-wider cursor-pointer">
                             {{ session('lang') == 'en' ? 'Follow us' : 'تابعنا' }}
                             <span
                                 class="inline-block ml-2 transition-transform duration-300 group-hover:rotate-180">▼</span>
                         </h2>
                         <div
-                            class="absolute top-full left-0 w-full opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0 z-50
+                            class="relative top-full left-0 w-full opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0 z-0
                             sm:static sm:opacity-100 sm:visible sm:transform-none sm:mt-4">
                             <ul
                                 class="text-[#9e01a1] flex flex-wrap font-medium bg-white/90 backdrop-blur-sm justify-center items-center p-4 rounded-xl gap-4 shadow-lg">

@@ -24,7 +24,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="m1 9 4-4-4-4" />
                             </svg>
-                            <span class="text-sm font-medium text-purple-600 dark:text-purple-400">
+                            <span class="text-sm font-medium text-black">
                                 {{session('lang') == 'en' ? 'Shipping' : 'التوصيل'}}
                             </span>
                         </div>
@@ -44,7 +44,7 @@
 
             <!-- Enhanced Form -->
             <div class="bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 rounded-2xl shadow-xl border border-gray-200/60 dark:border-gray-700/60 overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-600 to-pink-600 h-2"></div>
+                {{-- <div class="bg-gradient-to-r from-purple-600 to-pink-600 h-2"></div> --}}
                 
                 <form action="{{ route('order.store') }}" method="POST" class="p-8 md:p-10 space-y-8">
                     @csrf
@@ -110,8 +110,8 @@
                                 <select required
                                     class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer transition-colors duration-200"
                                     name="country" id="country">
-                                    <option value="IRAQ" class="bg-white dark:bg-gray-800">
-                                        {{session('lang') == 'en' ? 'IRAQ' : 'العراق'}}
+                                    <option value="LEBANON" class="bg-white dark:bg-gray-800">
+                                        {{session('lang') == 'en' ? 'Lebanon' : 'لبنان'}}
                                     </option>
                                 </select>
                                 <label for="country"
@@ -136,7 +136,7 @@
                     <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
                         <div class="flex justify-center md:justify-end">
                             <button type="submit"
-                                class="group relative overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-800">
+                                class="group relative overflow-hidden border text-black font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-800">
                                 <span class="relative z-10 flex items-center space-x-2 rtl:space-x-reverse">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>

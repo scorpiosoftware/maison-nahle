@@ -9,7 +9,7 @@
        
                 </div>
                 <p class="mt-0.5 truncate text-sm font-normal text-black">
-                    د.ع {{ $details['price'] }}</p>
+                    $ {{ $details['price'] }}</p>
                 <div class="flex items-end justify-end gap-6">
                     <p class="text-sm font-normal leading-none text-black">{{session('lang') == 'en' ? 'QTY' : 'عدد'}} : 
                         {{ $details['quantity'] }}</p>
@@ -38,7 +38,7 @@
     @if (!empty(session('cart')))
     <div class="pt-10">
         <a href="{{ route('cart.show') }}"
-            class="mb-2 inline-flex items-center justify-center w-full rounded-lg border-2 border-transparent text-white bg-gray-500 px-5 py-2.5 text-sm font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-primary-300">
+            class="mb-2 inline-flex items-center justify-center w-full rounded-lg border text-black bg-white px-5 py-2.5 text-sm font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-primary-300">
                {{session('lang') == 'en' ? 'Proceed to Checkout' : 'المتابعة للدفع'}}
         </a>
     </div>

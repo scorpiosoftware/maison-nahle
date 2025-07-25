@@ -88,7 +88,7 @@
                         </p>
                         <div class="flex items-center mt-2">
                             <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
-                                د.ع {{ number_format($revenue) }}
+                                $ {{ number_format($revenue) }}
                             </h3>
                             <span
                                 class="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
@@ -115,7 +115,7 @@
                         </p>
                         <div class="flex items-center mt-2">
                             <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
-                                د.ع {{ number_format($unpaid) }}
+                                $ {{ number_format($unpaid) }}
                             </h3>
                             <span
                                 class="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
@@ -142,7 +142,7 @@
                         </p>
                         <div class="flex items-center mt-2">
                             <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
-                                د.ع {{ number_format($total) }}
+                                $ {{ number_format($total) }}
                             </h3>
                             <span
                                 class="ml-2 px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
@@ -439,7 +439,7 @@
                             {{ session('lang') == 'en' ? 'New order #1234 completed' : 'تم إكمال طلب جديد #1234' }}
                         </p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">
-                            {{ session('lang') == 'en' ? 'Customer: Ahmed Mohammed - Total: د.ع 125,000' : 'العميل: أحمد محمد - الإجمالي: د.ع 125,000' }}
+                            {{ session('lang') == 'en' ? 'Customer: Ahmed Mohammed - Total: $ 125,000' : 'العميل: أحمد محمد - الإجمالي: $ 125,000' }}
                         </p>
                         <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">
                             2 hours ago
@@ -464,7 +464,7 @@
                             {{ session('lang') == 'en' ? 'Payment received for order #1233' : 'تم استلام الدفع للطلب #1233' }}
                         </p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">
-                            {{ session('lang') == 'en' ? 'Amount: د.ع 85,000 - Method: Cash on delivery' : 'المبلغ: د.ع 85,000 - الطريقة: الدفع عند الاستلام' }}
+                            {{ session('lang') == 'en' ? 'Amount: $ 85,000 - Method: Cash on delivery' : 'المبلغ: $ 85,000 - الطريقة: الدفع عند الاستلام' }}
                         </p>
                         <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">
                             5 hours ago

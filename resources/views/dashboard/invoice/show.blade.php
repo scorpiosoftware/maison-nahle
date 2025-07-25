@@ -74,7 +74,7 @@
                         </div>
                     </td>
                     <td class="px-6 py-4 font-semibold text-gray-900 text-nowrap d:text-white">
-                        {{ $item->subtotal }} د.ع
+                        {{ $item->subtotal }} $
                     </td>
 
                 </tr>
@@ -85,7 +85,7 @@
         </table>
         <div class="w-full flex justify-between items-start text-black font-bold px-10 py-2">
             <p>الحالة : {{ $record->status }}</p>
-            <p>المجموع : {{ $record->total_amount }} د.ع</p>
+            <p>المجموع : {{ $record->total_amount }} $</p>
         </div>
     </div>
 

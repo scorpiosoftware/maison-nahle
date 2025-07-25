@@ -43,7 +43,7 @@
 
         <div class="flex items-center justify-between gap-4">
             <button type="submit"
-                class="flex-1 px-6 py-3.5 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors duration-300 transform hover:scale-[1.02] shadow-md">
+                class="flex-1 px-6 py-3.5 border-2 border-gray-300 text-gray-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-300 transform hover:scale-[1.02]">
                 {{ session('lang') == 'en' ? 'Search' : 'ابحث' }}
             </button>
             

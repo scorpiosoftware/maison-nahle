@@ -1,349 +1,278 @@
-
 @extends('layouts.home')
 @section('content')
-    <!-- drawer init and toggle -->
-    <!-- drawer component -->
+    <!-- Universal Mobile Filter Drawer -->
+    <div id="filter-drawer"
+        class="fixed top-0 left-0 z-50 w-full max-w-sm h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white shadow-xl"
+        tabindex="-1" aria-labelledby="filter-drawer-label">
 
-    {{-- mobile filter version --}}
-    <div id="drawer-disabled-backdrop"
-        class="fixed top-0 left-0 z-40 md:hidden h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-[350px] dark:bg-gray-800"
-        tabindex="-1" aria-labelledby="drawer-disabled-backdrop-label">
-
-        <h5 id="drawer-disabled-backdrop-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">
-            {{ session('lang') == 'en' ? 'Filter' : 'منقي' }}</h5>
-        <div class="py-4 overflow-y-auto max-w-2xl">
-            <form action="{{ route('filter.products') }}" method="POST">
-                @csrf
-                @method('POST')
-                <div class="border p-2">
-                    <h1> {{ session('lang') == 'en' ? 'Sort By' : 'ترتيب' }}</h1>
-                    <select name="sorting" id="sorting">
-                        <option value="asc">{{ session('lang') == 'en' ? 'Ascending' : 'تصاعدي' }}</option>
-                        <option value="desc" @if (request()->input('sorting') == 'desc') selected @endif>
-                            {{ session('lang') == 'en' ? 'Descending' : 'تنازلي' }}</option>
-                        <option value="low_price" @if (request()->input('sorting') == 'low_price') selected @endif>
-                            {{ session('lang') == 'en' ? 'Price - Low to high' : 'السعر من الارخص للاعلى' }}
-                        </option>
-                        <option value="high_price" @if (request()->input('sorting') == 'high_price') selected @endif>
-                            {{ session('lang') == 'en' ? 'Price - High to low' : 'السعر الاعلى الى الادنى' }}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="border p-2">
-                    <div class="border p-2">
-                        <h1>{{ session('lang') == 'en' ? 'Categories' : 'فئات' }}</h1>
-                        @foreach ($categories as $cat)
-                            <div class="flex items-center">
-                                <input id="categories" type="checkbox" value="{{ $cat->id }}" name="categories[]"
-                                    class="w-4
-                                    h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
-                                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                                    dark:border-gray-600"
-                                    @if (!empty(request()->input('categories'))) @foreach (request()->input('categories') as $index)
-                                    @if ($index == $cat->id)
-                                    checked
-                                    @break @endif
-                                    @endforeach
-                        @endif
-                        >
-                        <label for="categories"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ session('lang') == 'en' ? $cat->name_en : $cat->name_ar }}</label>
-
-                    </div>
-                    @endforeach
-                </div>
-
-        </div>
-
-
-
-        <div class="border p-2">
-            <div class="border p-2">
-                <h1>{{ session('lang') == 'en' ? 'Brands' : 'العلامات التجارية' }}</h1>
-                @foreach ($brands as $brand)
-                    <div class="flex items-center">
-                        <input id="brands" type="checkbox" value="{{ $brand->id }}" name="brands[] class="w-4 h-4
-                            text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600
-                            dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                            @if (!empty(request()->input('brands'))) @foreach (request()->input('brands') as $b)
-                                    @if ($b == $brand->id)
-                                    checked
-                                    @break @endif
-                            @endforeach
-                @endif>
-
-                <label for="brands"
-                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ session('lang') == 'en' ? $brand->name_en : $brand->name_ar }}</label>
-            </div>
-            @endforeach
-        </div>
-
-    </div>
-    <div class="border p-2">
-        <div class="border p-2">
-            <h1>{{ session('lang') == 'en' ? 'STORES' : 'المتاجر' }}</h1>
-            @foreach ($sections as $section)
-                <div class="flex items-center">
-                    <input id="sections" type="checkbox" value="{{ $section->id }}" name="sections[] class="w-4 h-4
-                        text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600
-                        dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        @if (!empty(request()->input('sections'))) @foreach (request()->input('sections') as $b)
-                                @if ($b == $section->id)
-                                checked
-                                @break @endif
-                        @endforeach
-            @endif>
-
-            <label for="sections"
-                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ session('lang') == 'en' ? $section->name : $section->name_ar }}</label>
-        </div>
-        @endforeach
-    </div>
-
-    </div>
-    <div class="border p-2">
-        <div class="border p-2">
-            <h1>{{ session('lang') == 'en' ? 'Branches' : 'الاقسام' }}</h1>
-            <select name="branch" id="branches">
-                <option value=""></option>
-                @foreach ($branches as $branch)
-                    <option value="{{ $branch->id }}"
-                        @if (!empty(request()->input('branch'))) @if (request()->input('branch') == $branch->id)
-                    selected @endif
-                        @endif>
-                        {{ session('lang') == 'en' ? $branch->name : $branch->name_ar }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-
-    </div>
-
-    <div class="border p-2">
-        <h1>{{ session('lang') == 'en' ? 'Price I.Q.D' : 'السعر د.ع' }}</h1>
-        <div class="flex space-x-2 justify-between items-center ">
-            <label class="inline-block text-start w-full text-sm text-gray-600"
-                for="Multiselect">{{ session('lang') == 'en' ? 'maximum' : 'السعر الادنى' }}</label>
-            <input type="number" step="any" min="0" class="w-24 h-8" name="min_price"
-                placeholder="{{ session('lang') == 'en' ? 'From' : 'من' }}"
-                @if (!empty(request()->input('min_price'))) value = {{ request()->input('min_price') }} @endif />
-            <label class="inline-block text-start w-full text-sm text-gray-600"
-                for="Multiselect">{{ session('lang') == 'en' ? 'minumum' : 'السعر الاقصى' }}</label>
-            <input type="number" step="any" min="0" class="w-24 h-8" name="max_price"
-                placeholder="{{ session('lang') == 'en' ? 'To' : 'الى' }}"
-                @if (!empty(request()->input('max_price'))) value = {{ request()->input('max_price') }} @endif />
-        </div>
-    </div>
-    <div class="flex justify-end text-sm pt-2">
-        <button type="submit"
-            class="p-2 rounded-md bg-white text-[#ec5793] border w-full font-bold transition-all delay-75 hover:text-white hover:bg-[#ec5793]">
-            {{ session('lang') == 'en' ? 'Apply' : 'تأكيد' }}</button>
-    </div>
-    </form>
-
-    </div>
-    <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop"
-        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-        <span class="sr-only">Close menu</span>
-    </button>
-
-    </div>
-
-    {{-- desktop filter version --}}
-    <div class="bg-white flex justify-center items-start">
-        <div class="md:block hidden py-4 px-6  overflow-y-auto ">
-            <form action="{{ route('filter.products') }}" method="POST">
-                @csrf
-                @method('POST')
-                <div class="border p-2">
-                    <h1>{{ session('lang') == 'en' ? 'sorting' : 'ترتيب' }}</h1>
-                    <select name="sorting" id="sorting">
-                        <option value="asc">{{ session('lang') == 'en' ? 'Ascending' : 'تصاعدي' }}</option>
-                        <option value="desc" @if (request()->input('sorting') == 'desc') selected @endif>
-                            {{ session('lang') == 'en' ? 'Descending' : 'تنازلي' }}</option>
-                        <option value="low_price" @if (request()->input('sorting') == 'low_price') selected @endif>
-                            {{ session('lang') == 'en' ? 'Price - Low to high' : 'السعر من الارخص للاعلى' }}
-                        </option>
-                        <option value="high_price" @if (request()->input('sorting') == 'high_price') selected @endif>
-                            {{ session('lang') == 'en' ? 'Price - High to low' : 'السعر الاعلى الى الادنى' }}
-                        </option>
-                    </select>
-                </div>
-                {{-- <div class="border p-2">
-                    <div class="border p-2">
-                        <h1>{{ session('lang') == 'en' ? 'colors' : 'الوان' }}</h1>
-                        <div class="grid grid-cols-3 gap-4 items-center justify-items-center max-w-40 mx-auto">
-
-                            @foreach ($colors as $color)
-                                <div class="items-center flex justify-stretch gap-x-4">
-                                    <input type="checkbox" value="{{ $color->id }}" name="color_id[]"
-                                        class="rounded-full box-border size-6 p-2 hover:border bg-[{!! $color->hex_code !!}]"
-                                        style="background-color: {!! $color->hex_code !!}"
-                                        @if (!empty(request()->input('color_id'))) @foreach (request()->input('color_id') as $index)
-                                    @if ($index == $color->id)
-                                    checked
-                                    @break @endif
-                                        @endforeach
-                            @endif
-                            />
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-        </div> --}}
-                <div class="border p-2">
-                    <div class="border p-2">
-                        <h1>{{ session('lang') == 'en' ? 'Categories' : 'فئات' }}</h1>
-                        @foreach ($categories as $cat)
-                            <div class="flex items-center">
-                                <input id="categories" type="checkbox" value="{{ $cat->id }}"
-                                    name="categories[] class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded
-                                    focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2
-                                    dark:bg-gray-700 dark:border-gray-600"
-                                    @if (!empty(request()->input('categories'))) @foreach (request()->input('categories') as $index)
-                                    @if ($index == $cat->id)
-                                    checked
-                                    @break @endif
-                                    @endforeach
-                        @endif
-                        >
-                        <label for="categories"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ session('lang') == 'en' ? $cat->name_en : $cat->name_ar }}</label>
-
-                    </div>
-                    @endforeach
-                </div>
-        </div>
-
-        <div class="border p-2">
-            <div class="border p-2">
-                <h1>{{ session('lang') == 'en' ? 'Brands' : 'العلامات التجارية' }}</h1>
-                @foreach ($brands as $brand)
-                    <div class="flex items-center">
-                        <input id="brands" type="checkbox" value="{{ $brand->id }}" name="brands[] class="w-4 h-4
-                            text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600
-                            dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                            @if (!empty(request()->input('brands'))) @foreach (request()->input('brands') as $b)
-                                    @if ($b == $brand->id)
-                                    checked
-                                    @break @endif
-                            @endforeach
-                @endif>
-
-                <label for="brands"
-                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ session('lang') == 'en' ? $brand->name_en : $brand->name_ar }}</label>
-            </div>
-            @endforeach
-        </div>
-
-    </div>
-
-    <div class="border p-2">
-        <div class="border p-2">
-            <h1>{{ session('lang') == 'en' ? 'STORES' : 'المتاجر' }}</h1>
-            @foreach ($sections as $section)
-                <div class="flex items-center">
-                    <input id="section_id-{{ $section->id }}" type="checkbox" value="{{ $section->id }}"
-                        name="sections[] class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded
-                        focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                        dark:border-gray-600"
-                        @if (!empty(request()->input('sections'))) @foreach (request()->input('sections') as $b)
-                                @if ($b == $section->id)
-                                checked
-                                @break @endif
-                        @endforeach
-            @endif>
-
-            <label for="section_id-{{ $section->id }}"
-                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                {{ session('lang') == 'en' ? $section->name : $section->name_ar }}
-            </label>
-        </div>
-        @endforeach
-    </div>
-
-    </div>
-    <div class="border p-2">
-        <div class="border p-2">
-            <h1>{{ session('lang') == 'en' ? 'Branches' : 'الاقسام' }}</h1>
-            <select name="branch" id="branchesSelect">
-                <option value=""></option>
-                @foreach ($branches as $branch)
-                    <option value="{{ $branch->id }}"
-                        @if (!empty(request()->input('branch'))) @if (request()->input('branch') == $branch->id)
-                    selected @endif
-                        @endif>
-                        {{ session('lang') == 'en' ? $branch->name : $branch->name_ar }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-
-    <div class="border p-2">
-        <h1>{{ session('lang') == 'en' ? 'Price I.Q.D' : 'السعر د.ع' }}</h1>
-        <div class="flex space-x-2 justify-between items-center">
-            <label class="inline-block text-start w-full text-sm text-gray-600"
-                for="Multiselect">{{ session('lang') == 'en' ? 'maximum' : 'السعر الادنى' }}</label>
-            <input type="number" step="any" min="0" class="w-24 h-8" name="min_price" placeholder=""
-                @if (!empty(request()->input('min_price'))) value = {{ request()->input('min_price') }} @endif />
-            <label class="inline-block text-start w-full text-sm text-gray-600"
-                for="Multiselect">{{ session('lang') == 'en' ? 'minumum' : 'السعر الاقصى' }}</label>
-            <input type="number" step="any" min="0" class="w-24 h-8" name="max_price" placeholder=""
-                @if (!empty(request()->input('max_price'))) value = {{ request()->input('max_price') }} @endif />
-        </div>
-    </div>
-    <div class="flex justify-end text-sm pt-2">
-        <button type="submit"
-            class="p-2 rounded-md bg-white text-[#ec5793] border w-full font-bold transition-all delay-75 hover:text-white hover:bg-[#ec5793]">
-            {{ session('lang') == 'en' ? 'Apply' : 'تأكيد' }}</button>
-    </div>
-    </form>
-    </div>
-    <div class=" pt-4">
-        <div class="text-start md:hidden justify-end p-4 flex">
-            <button
-                class="p-2 rounded-md bg-white text-[#ec5793] border font-bold transition-all delay-75 hover:text-white hover:bg-[#ec5793]"
-                type="button" data-drawer-target="drawer-disabled-backdrop" data-drawer-show="drawer-disabled-backdrop"
-                data-drawer-backdrop="false" aria-controls="drawer-disabled-backdrop">
-                {{ session('lang') == 'en' ? 'Filter' : 'بحث مفصل' }}
+        <!-- Header with Close Button -->
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+            <h5 id="filter-drawer-label" class="text-lg font-semibold text-gray-900">
+                {{ session('lang') == 'en' ? 'Filter Products' : 'تصفية المنتجات' }}
+            </h5>
+            <button type="button" data-drawer-hide="filter-drawer" aria-controls="filter-drawer"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="sr-only">Close filter</span>
             </button>
         </div>
-        <div class="">
-            <livewire:breadcrumb :links="[
-                [
-                    'path' => '/',
-                    'name_en' => 'Home',
-                    'name_ar' => 'الصفحة الرئيسية',
-                ],
-                [
-                    'path' => '/shop',
-                    'name_en' => 'Catalog',
-                    'name_ar' => 'المنتجات',
-                ],
-            ]">
+
+        <!-- Filter Form -->
+        <div class="space-y-4 custom-scrollbar overflow-y-auto">
+            <form action="{{ route('filter.products') }}" method="POST">
+                @csrf
+                @method('POST')
+                
+                <!-- Sort By Section -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <label class="block text-sm font-medium text-gray-900 mb-2">
+                        {{ session('lang') == 'en' ? 'Sort By' : 'ترتيب' }}
+                    </label>
+                    <select name="sorting" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm">
+                        <option value="asc">{{ session('lang') == 'en' ? 'Ascending' : 'تصاعدي' }}</option>
+                        <option value="desc" @if (request()->input('sorting') == 'desc') selected @endif>
+                            {{ session('lang') == 'en' ? 'Descending' : 'تنازلي' }}
+                        </option>
+                        <option value="low_price" @if (request()->input('sorting') == 'low_price') selected @endif>
+                            {{ session('lang') == 'en' ? 'Price - Low to High' : 'السعر من الارخص للاعلى' }}
+                        </option>
+                        <option value="high_price" @if (request()->input('sorting') == 'high_price') selected @endif>
+                            {{ session('lang') == 'en' ? 'Price - High to Low' : 'السعر الاعلى الى الادنى' }}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Categories Section -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h6 class="text-sm font-medium text-gray-900 mb-3">
+                        {{ session('lang') == 'en' ? 'Categories' : 'فئات' }}
+                    </h6>
+                    <div class="space-y-2 max-h-32 overflow-y-auto">
+                        @foreach ($categories as $cat)
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" value="{{ $cat->id }}" name="categories[]"
+                                    class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded focus:ring-gray-900 focus:ring-2"
+                                    @if (!empty(request()->input('categories'))) 
+                                        @foreach (request()->input('categories') as $index)
+                                            @if ($index == $cat->id) checked @break @endif
+                                        @endforeach
+                                    @endif>
+                                <span class="ml-2 text-sm text-gray-700">
+                                    {{ session('lang') == 'en' ? $cat->name_en : $cat->name_ar }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Brands Section -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h6 class="text-sm font-medium text-gray-900 mb-3">
+                        {{ session('lang') == 'en' ? 'Brands' : 'العلامات التجارية' }}
+                    </h6>
+                    <div class="space-y-2 max-h-32 overflow-y-auto">
+                        @foreach ($brands as $brand)
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" value="{{ $brand->id }}" name="brands[]"
+                                    class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded focus:ring-gray-900 focus:ring-2"
+                                    @if (!empty(request()->input('brands'))) 
+                                        @foreach (request()->input('brands') as $b)
+                                            @if ($b == $brand->id) checked @break @endif
+                                        @endforeach
+                                    @endif>
+                                <span class="ml-2 text-sm text-gray-700">
+                                    {{ session('lang') == 'en' ? $brand->name_en : $brand->name_ar }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Stores Section -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h6 class="text-sm font-medium text-gray-900 mb-3">
+                        {{ session('lang') == 'en' ? 'Stores' : 'المتاجر' }}
+                    </h6>
+                    <div class="space-y-2 max-h-32 overflow-y-auto">
+                        @foreach ($sections as $section)
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" value="{{ $section->id }}" name="sections[]"
+                                    class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded focus:ring-gray-900 focus:ring-2"
+                                    @if (!empty(request()->input('sections'))) 
+                                        @foreach (request()->input('sections') as $b)
+                                            @if ($b == $section->id) checked @break @endif
+                                        @endforeach
+                                    @endif>
+                                <span class="ml-2 text-sm text-gray-700">
+                                    {{ session('lang') == 'en' ? $section->name : $section->name_ar }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Branches Section -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <label class="block text-sm font-medium text-gray-900 mb-2">
+                        {{ session('lang') == 'en' ? 'Branches' : 'الاقسام' }}
+                    </label>
+                    <select name="branch" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm">
+                        <option value="">{{ session('lang') == 'en' ? 'All Branches' : 'جميع الاقسام' }}</option>
+                        @foreach ($branches as $branch)
+                            <option value="{{ $branch->id }}"
+                                @if (!empty(request()->input('branch')) && request()->input('branch') == $branch->id) selected @endif>
+                                {{ session('lang') == 'en' ? $branch->name : $branch->name_ar }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Price Range Section -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h6 class="text-sm font-medium text-gray-900 mb-3">
+                        {{ session('lang') == 'en' ? 'Price Range ($)' : 'نطاق السعر ($)' }}
+                    </h6>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-600 mb-1">
+                                {{ session('lang') == 'en' ? 'Min Price' : 'السعر الادنى' }}
+                            </label>
+                            <input type="number" step="any" min="0" name="min_price"
+                                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm"
+                                placeholder="{{ session('lang') == 'en' ? 'From' : 'من' }}"
+                                @if (!empty(request()->input('min_price'))) value="{{ request()->input('min_price') }}" @endif>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-600 mb-1">
+                                {{ session('lang') == 'en' ? 'Max Price' : 'السعر الاقصى' }}
+                            </label>
+                            <input type="number" step="any" min="0" name="max_price"
+                                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm"
+                                placeholder="{{ session('lang') == 'en' ? 'To' : 'الى' }}"
+                                @if (!empty(request()->input('max_price'))) value="{{ request()->input('max_price') }}" @endif>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-2 pt-4 border-t border-gray-200">
+                    <button type="submit"
+                        class="flex-1 bg-gray-900 text-white py-3 px-4 rounded-md font-medium hover:bg-gray-800 transition-colors duration-200">
+                        {{ session('lang') == 'en' ? 'Apply Filters' : 'تطبيق التصفية' }}
+                    </button>
+                    <a href="{{ route('shop.index') }}" 
+                        class="flex-1 bg-gray-100 text-gray-700 py-3 px-4 rounded-md font-medium hover:bg-gray-200 transition-colors duration-200 text-center">
+                        {{ session('lang') == 'en' ? 'Clear' : 'مسح' }}
+                    </a>
+                </div>
+            </form>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-10 md:px-0 mt-2">
+    </div>
+
+    <!-- Main Content -->
+    <div class="min-h-screen bg-gray-50">
+        <!-- Header Section -->
+        <div class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Breadcrumb -->
+                <div class="py-4">
+                    <livewire:breadcrumb :links="[
+                        [
+                            'path' => '/',
+                            'name_en' => 'Home',
+                            'name_ar' => 'الصفحة الرئيسية',
+                        ],
+                        [
+                            'path' => '/shop',
+                            'name_en' => 'Catalog',
+                            'name_ar' => 'المنتجات',
+                        ],
+                    ]">
+                </div>
+                
+                <!-- Filter Button and Results Count -->
+                <div class="pb-4 flex items-center justify-between">
+                    <button
+                        class="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md font-medium hover:bg-gray-50 hover:border-gray-400 transition-all duration-200"
+                        type="button" data-drawer-target="filter-drawer" data-drawer-show="filter-drawer"
+                        data-drawer-backdrop="false" aria-controls="filter-drawer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"/>
+                        </svg>
+                        {{ session('lang') == 'en' ? 'Filter Products' : 'تصفية المنتجات' }}
+                    </button>
+                    
+                    <div class="text-sm text-gray-500">
+                        {{ session('lang') == 'en' ? 'Showing' : 'عرض' }} 
+                        <span class="font-medium text-gray-900">{{ $products->count() }}</span>
+                        {{ session('lang') == 'en' ? 'products' : 'منتج' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             @if ($products->count() <= 0)
-                <div class="text-center flex items-center justify-center w-full">
-                    {{ session('lang') == 'en' ? 'No results found' : 'لم يتم العثور على نتائج' }}</div>
+                <div class="text-center py-16">
+                    <div class="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">
+                        {{ session('lang') == 'en' ? 'No products found' : 'لم يتم العثور على منتجات' }}
+                    </h3>
+                    <p class="text-gray-500">
+                        {{ session('lang') == 'en' ? 'Try adjusting your filters or search terms' : 'جرب تعديل المرشحات أو مصطلحات البحث' }}
+                    </p>
+                </div>
+            @else
+                <!-- Responsive Grid: 1 col mobile, 2 cols tablet, 3 cols desktop -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach ($products as $item)
+                        @livewire('product', ['item' => $item], key($item->id))
+                    @endforeach
+                </div>
             @endif
-            @foreach ($products as $item)
-                @livewire('product', ['item' => $item], key($item->id))
-            @endforeach
-
         </div>
+
+        <!-- Pagination -->
+        @if ($products->hasPages())
+            <div class="bg-white border-t border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div class="flex justify-center">
+                        {{ $products->links() }}
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 
-    </div>
-    <nav aria-label="Page navigation example" class="p-4 w-1/4 mx-auto">
-        {{ $products->links() }}
-    </nav>
+    <!-- Quick View Modal -->
     <livewire:quick-view-product />
+
+    <!-- Custom Scrollbar Styles -->
+    <style>
+        .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #d1d5db #f3f4f6;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f3f4f6;
+            border-radius: 2px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 2px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+    </style>
 @endsection

@@ -19,7 +19,7 @@
                                         </a>
                                         <div class="text-end md:order-4 md:w-32">
                                             <p class="text-base font-bold text-gray-900 dark:text-white">
-                                                {{ session('lang') == 'en' ? 'IQD' : 'د.ع' }} {{ $details['price'] }}</p>
+                                                {{ session('lang') == 'en' ? '$' : '$' }} {{ $details['price'] }}</p>
                                         </div>
 
                                         <div class="text-end md:order-4 md:w-32">
@@ -62,7 +62,7 @@
                 {{ session('lang') == 'en' ? 'Your wishlist is currently empty' : 'لا يوجد منتجات مفضلة !' }} </h2>
             <p class="text-gray-600 mb-6">  {{ session('lang') == 'en' ? 'Start exploring and add items you love to your wishlist!' : 'ابدا بالتسوق الان و اختر ما تحب' }}</p>
             <a href="/shop"
-                class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">
+                class="inline-block bg-white  border-2 text-black font-medium py-2 px-4 rounded-lg transition">
                   {{ session('lang') == 'en' ? 'Continue Shopping ' : 'تسوق هنا' }}
             </a>
         </div>
