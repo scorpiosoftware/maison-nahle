@@ -19,7 +19,7 @@ class DashboardController extends Controller
             return redirect('/');
         }
         $setlocal = new LocalizationControll();
-        $setlocal->setLocal();
+        // $setlocal->setLocal();
         $inputs = $request->all();
         $date = !empty( $inputs['date'] ) ? $inputs['date'] : '';
         $applied_orders = AppliedOrders::execute();

@@ -41,7 +41,7 @@ Route::get('/lang/{locale}', function (string $locale) {
 });
 
 Route::group(['prefix' => ''], function () {
-     App::setLocale(session('lang'));
+ 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('shop', ShopController::class);
     Route::get('/shop/{id}/{slug}', [ShopController::class, 'show'])
