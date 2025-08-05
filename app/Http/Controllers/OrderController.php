@@ -90,6 +90,13 @@ class OrderController extends Controller
                 $item->order_id = $order->id;
                 $item->quantity = $details['quantity'];
                 $item->subtotal = $details['price'];
+                if (isset($details['color']) && !empty($details['color'])) {
+                    $item->color = $details['color']['name'];
+                    $item->hex_code = $details['color']['hex_code'];
+                }
+                if (isset($details['size']) && !empty($details['size'])) {
+                    $item->size = $details['size']['name'];
+                }
                 $item->save();
             }
         }
