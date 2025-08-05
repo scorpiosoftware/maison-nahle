@@ -16,7 +16,7 @@
                             <img src="{{ asset('storage/' . $carousel->logo_url) }}"
                                 alt="{{ session('lang') == 'en' ? env('APP_NAME') : env('APP_NAME_AR') }}"
                                 class="h-full w-auto object-contain"
-                                style="filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));" loading="eager">
+                                 loading="eager">
                         </div>
                     @else
                         <span

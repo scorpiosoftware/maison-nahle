@@ -66,9 +66,10 @@ class CarouselController extends Controller
             $record->save();
         }
 
+     
+
         // Handle photos upload only if files are present
         if ($request->hasFile('photos')) {
-            // Log how many photos we received
             // Delete existing images
             $record = GetCarousel::execute($id);
             foreach ($record->images as $image) {
@@ -86,15 +87,24 @@ class CarouselController extends Controller
                 // Define the storage path
                 $storagePath = 'carousel/' . $record->id;
 
-                // Generate a unique filename
-                $filename = uniqid() . '.png';
+                // Generate a unique filename with .webp extension
+                $filename = uniqid() . '.webp';
 
-                // Store the image in public/storage
-                $compressedImage->save(storage_path('app/public/' . $storagePath . '/' . $filename));
+                // Create the full storage path
+                $fullStoragePath = storage_path('app/public/' . $storagePath);
+
+                // Create directory if it doesn't exist
+                if (!file_exists($fullStoragePath)) {
+                    mkdir($fullStoragePath, 0755, true);
+                }
+
+                // Save as WebP with quality setting (optional)
+                $compressedImage->toWebp(85)->save($fullStoragePath . '/' . $filename);
 
                 // The public URL would be accessible at /storage/carousel/{id}/{filename}
-                $publicUrl = '/' . $storagePath . '/' . $filename;
+                $publicUrl = $storagePath . '/' . $filename;
                 info($publicUrl);
+
                 $image->url = $publicUrl;
                 $image->carousel_id = $record->id;
                 $image->save();

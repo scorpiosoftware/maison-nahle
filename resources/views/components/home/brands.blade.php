@@ -1,10 +1,10 @@
 <div class="brands-section py-4 px-4">
     <div class="container mx-auto max-w-4xl">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-8 text-gray-800 dark:text-gray-200 opacity-0 transform translate-y-4 animate-fade-in tracking-tight">
+        <div class="text-xl font-extrabold text-center mb-8 text-gray-800 dark:text-gray-200 opacity-0 transform translate-y-4 animate-fade-in tracking-tight">
             <span class="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400">
                 {{session('lang') == 'en' ? 'Our Trusted Brands' : 'علاماتنا التجارية الموثوقة'}}
             </span>
-        </h2>
+        </div>
         
         <div class="w-24 h-1 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 mx-auto mb-16 rounded-full"></div>
         
