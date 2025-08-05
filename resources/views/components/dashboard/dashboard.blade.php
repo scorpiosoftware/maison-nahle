@@ -18,7 +18,7 @@
                 {{-- Logo Section --}}
                 <a href="/" class="flex items-center {{ session('lang') == 'ar' ? 'mr-4 md:ml-24' : 'ml-4 md:mr-24' }} group">
                     <div class="relative">
-                        <img src="{{ URL::to('storage/'.$logo) }}" class="h-10 bg-gray-700 p-2 rounded-md transition-all duration-300 group-hover:scale-105" alt="Logo" />
+                        <img src="{{ URL::to('storage/'.$logo) }}" class="h-10  p-2 rounded-md transition-all duration-300 group-hover:scale-105" alt="Logo" />
                         <div class="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                 </a>
