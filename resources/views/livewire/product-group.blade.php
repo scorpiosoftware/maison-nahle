@@ -1,7 +1,7 @@
 <div x-data="{ show: true }" class="md:mx-auto w-full md:max-w-6xl px-4">
     <div @click="show = !show"
         class="group flex items-center justify-between p-4 mb-6 rounded-lg border shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-        <h2 class="text-2xl font-bold text-gray-800">{{ $title }}</h2>
+        <h2 class="text-xl font-bold text-gray-800">{{ $title }}</h2>
         <div class="transform transition-transform duration-300" :class="{ 'rotate-180': !show }">
             <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
