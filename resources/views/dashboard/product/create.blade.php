@@ -245,6 +245,7 @@
                         </div>
                         <script>
                             new TomSelect('#colors', {
+                                minItems: 0,
                                 maxItems: 100,
                             });
                         </script>

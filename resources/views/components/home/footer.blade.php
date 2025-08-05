@@ -68,7 +68,7 @@
                             </li>
                             <li
                                 class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 hover:bg-white hover:shadow-lg">
-                                <a href=""
+                                <a href="/terms-conditions"
                                     class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'Terms & Conditions' : 'الشروط والأحكام' }}</a>
                             </li>
                         </ul>

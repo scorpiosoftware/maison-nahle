@@ -60,6 +60,11 @@ Route::group(['prefix' => ''], function () {
         $categories = ListCategory::execute();
         return view('support.privacy', compact('categories', 'carousel'));
     });
+        Route::get('/terms-conditions', function () {
+        $carousel = Carousel::with('images')->first();
+        $categories = ListCategory::execute();
+        return view('support.terms', compact('categories', 'carousel'));
+    });
 });
 
 Route::post('/shop/', [ShopController::class, 'index'])->name('filter.products');

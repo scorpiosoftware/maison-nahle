@@ -274,7 +274,7 @@
                         <div class="relative flex w-full">
                             <select id="colors" name="colors[]" multiple placeholder="Select colors..."
                                 autocomplete="off" class="block w-full rounded-sm cursor-pointer focus:outline-none"
-                                multiple required>
+                                multiple>
                                 @foreach ($colors as $color)
                                     <option value="{{ $color->id }}"
                                         @if ($record->colors()->Where('colors.id', '=', $color->id)->find($color->id)) selected @endif>{{ $color->name }}
