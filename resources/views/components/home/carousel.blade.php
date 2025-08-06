@@ -2,7 +2,7 @@
     data-animation="animate__backInUp" data-delay="300">
 
     <!-- Shop Now Button -->
-    <div class="absolute md:top-1/2 top-4 right-4 md:right-10 z-40">
+    <div class="absolute top-1/2 right-4 md:right-10 z-40">
         <a href="/shop"
             class="inline-block px-6 py-3 font-bold rounded-full shadow-lg  
                           bg-gray-100 text-black hover:scale-105 transition-all duration-300 text-sm md:text-base">
