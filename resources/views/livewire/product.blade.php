@@ -76,7 +76,6 @@
                 }
             });
         });
-
     </script>
 
     <!-- Product Image Section -->
@@ -146,14 +145,14 @@
         <div class="flex items-center gap-2 mb-4">
             @if (!empty($item->offer_price))
                 <span class="text-lg font-bold text-gray-900">
-                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $item->offer_price }}
+                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $item->getFormattedOfferPrice() }}
                 </span>
                 <span class="text-sm text-gray-500 line-through">
-                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $item->price }}
+                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $item->getFormattedPrice() }}
                 </span>
             @else
                 <span class="text-lg font-bold text-gray-900">
-                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $item->price }}
+                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $item->getFormattedPrice() }}
                 </span>
             @endif
         </div>
@@ -161,10 +160,18 @@
         <!-- Add to Cart Button -->
         <button id="p-item-{{ $item->id }}" wire:click="addToCart({{ $item->id }})"
             class="w-full bg-white text-black border-2 py-3 px-4 rounded-lg font-medium text-sm  transition-colors duration-200 flex items-center justify-center gap-2 group/btn">
-            <svg class="w-4 h-4 transition-transform group-hover/btn:scale-110" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5-6m0 0L4 5M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
+            <svg class="w-6 h-6 transition-transform group-hover/btn:scale-110" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cart body -->
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5-6m0 0L4 5" />
+
+                <!-- Cart wheels -->
+                <circle cx="9" cy="19" r="1" stroke-width="1.5" fill="currentColor" />
+                <circle cx="20" cy="19" r="1" stroke-width="1.5" fill="currentColor" />
+
+                <!-- Cart handle -->
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.4 7H21l-2 8H7" />
             </svg>
             {{ session('lang') == 'en' ? 'Add to Cart' : 'أضف إلى السلة' }}
         </button>

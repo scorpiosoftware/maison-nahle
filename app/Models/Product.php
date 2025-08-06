@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Product extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'code',
         'name_en',
@@ -27,6 +28,62 @@ class Product extends Model
         'section_id',
         'branch_id'
     ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'offer_price' => 'decimal:2',
+    ];
+
+    // Helper method to get raw numeric price for calculations
+    public function getRawPrice()
+    {
+        return (float) $this->getRawOriginal('price');
+    }
+
+    // Helper method to get raw numeric offer price for calculations
+    public function getRawOfferPrice()
+    {
+        return (float) $this->getRawOriginal('offer_price');
+    }
+
+    // Helper method to get formatted price for display
+    public function getFormattedPrice()
+    {
+        return number_format($this->getRawOriginal('price'));
+    }
+
+    // Helper method to get formatted offer price for display
+    public function getFormattedOfferPrice()
+    {
+        return number_format($this->getRawOriginal('offer_price'));
+    }
+
+    // Helper method to calculate discount percentage
+    public function getDiscountPercentage()
+    {
+        $rawPrice = $this->getRawPrice();
+        $rawOfferPrice = $this->getRawOfferPrice();
+        
+        if ($rawPrice > 0 && $rawOfferPrice > 0) {
+            return round(100 - ($rawOfferPrice / $rawPrice * 100));
+        }
+        return 0;
+    }
+
+    // Mutator for price to handle comma-separated input
+    public function setPriceAttribute($value)
+    {
+        // Remove commas and convert to float
+        $this->attributes['price'] = str_replace(',', '', $value);
+    }
+
+    // Mutator for offer_price to handle comma-separated input
+    public function setOfferPriceAttribute($value)
+    {
+        // Remove commas and convert to float
+        $this->attributes['offer_price'] = str_replace(',', '', $value);
+    }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);
@@ -61,6 +118,7 @@ class Product extends Model
     {
         return $this->belongsTo(StoreSections::class);
     }
+    
     public function branch() : BelongsTo
     {
         return $this->belongsTo(Branch::class);

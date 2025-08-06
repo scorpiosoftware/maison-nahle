@@ -1,5 +1,7 @@
 <x-app-layout>
+    <livewire:options>
     <div class="container mx-auto px-4 py-6">
+        
         <!-- Header Section -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
             <div class="mb-4 md:mb-0">

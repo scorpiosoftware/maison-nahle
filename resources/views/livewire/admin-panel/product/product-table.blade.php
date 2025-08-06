@@ -3,7 +3,7 @@
         <div class="md:flex grid grid-cols-1">
             <a href="{{ route('product.create') }}" wire:navigate> <button type="button"
                     class="focus:outline-none shadow-lg text-white bg-green-400 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 d:bg-green-600 d:hover:bg-green-700 d:focus:ring-green-800">
-                    {{session('lang') == 'en' ? 'create' : 'انشاء'}}</button></a>
+                    {{ session('lang') == 'en' ? 'create' : 'انشاء' }}</button></a>
         </div>
         <div>
             <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only d:text-white">Search</label>
@@ -18,37 +18,37 @@
                 <input type="search" id="search" name="search" wire:model.live='search'
                     class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 d:bg-gray-700 d:border-gray-600 d:placeholder-gray-400 d:text-white d:focus:ring-blue-500 d:focus:border-blue-500"
                     placeholder="..." />
-                </div>
+            </div>
         </div>
     </div>
- 
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 d:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase text-nowrap bg-gray-50 d:bg-gray-700 d:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3 ">
-                        {{session('lang') == 'en' ? 'image' : 'الصورة الرئيسية'}}
+                        {{ session('lang') == 'en' ? 'image' : 'الصورة الرئيسية' }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{session('lang') == 'en' ? 'code' : 'الرمز التعريف'}}
+                        {{ session('lang') == 'en' ? 'code' : 'الرمز التعريف' }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{session('lang') == 'en' ? 'name' : 'الاسم '}}
+                        {{ session('lang') == 'en' ? 'name' : 'الاسم ' }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{session('lang') == 'en' ? 'quantity' : 'الكمية'}}
+                        {{ session('lang') == 'en' ? 'quantity' : 'الكمية' }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{session('lang') == 'en' ? 'price' : 'السعر'}}
+                        {{ session('lang') == 'en' ? 'price' : 'السعر' }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{session('lang') == 'en' ? 'offer price' : 'سعر بعد الحسم'}}
+                        {{ session('lang') == 'en' ? 'offer price' : 'سعر بعد الحسم' }}
                     </th>
                     {{-- <th scope="col" class="px-6 py-3">
                         {{session('lang') == 'en' ? 'status' : 'الحالة'}}
                     </th> --}}
                     <th scope="col" class="px-6 py-3 text-center">
-                        <span class="">{{session('lang') == 'en' ? 'tools' : 'الادوات'}}</span>
+                        <span class="">{{ session('lang') == 'en' ? 'tools' : 'الادوات' }}</span>
                     </th>
 
                 </tr>
@@ -66,16 +66,16 @@
                             {{ $record->code }}
                         </td>
                         <td class="px-6 py-4 text-base">
-                           {{session('lang') == 'en' ? $record->name_en  : $record->name_ar}}
+                            {{ session('lang') == 'en' ? $record->name_en : $record->name_ar }}
                         </td>
                         <td class="px-6 py-4 text-base">
                             {{ $record->stock_quantity }}
                         </td>
-                        <td class="px-6 py-4 text-base">
-                            {{ $record->price }}
+                        <td class="px-6 py-4 text-base text-nowrap">
+                            $ {{ $record->getFormattedPrice() }}
                         </td>
-                        <td class="px-6 py-4 text-base">
-                            {{ $record->offer_price ?? 'N/A' }}
+                        <td class="px-6 py-4 text-base text-nowrap">
+                            $ {{ $record->getFormattedOfferPrice() ?? 'N/A' }}
                         </td>
                         {{-- <td class="px-6 py-4 text-base">
                             {{ $record->status }}
@@ -128,14 +128,13 @@
 
             Livewire.on('status-updated', () => {
                 Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Status changed successfully!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                );
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Status changed successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             });
         });
     </script>

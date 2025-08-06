@@ -163,10 +163,10 @@
                             @if($product->offer_price)
                                 <div class="flex flex-col">
                                     <span class="text-xl sm:text-2xl font-bold text-black">
-                                        {{ session('lang') == 'en' ? '$' : '$' }} {{ number_format($product->offer_price) }}
+                                        {{ session('lang') == 'en' ? '$' : '$' }} {{ $product->getFormattedOfferPrice() }}
                                     </span>
                                     <span class="text-sm sm:text-base text-gray-500 line-through">
-                                        {{ session('lang') == 'en' ? '$' : '$' }} {{ number_format($product->price) }}
+                                        {{ session('lang') == 'en' ? '$' : '$' }} {{ $product->getFormattedPrice() }}
                                     </span>
                                 </div>
                                 <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-1 rounded-full self-start">
@@ -174,7 +174,7 @@
                                 </span>
                             @else
                                 <span class="text-xl sm:text-2xl font-bold text-black">
-                                    {{ session('lang') == 'en' ? '$' : '$' }} {{ number_format($product->price) }}
+                                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $product->price }}
                                 </span>
                             @endif
                         </div>

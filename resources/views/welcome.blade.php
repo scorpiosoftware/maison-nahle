@@ -25,7 +25,10 @@
 
     <div class="">
         @livewire('ads-modal')
-        <livewire:pop-up-card />
+
+        @if ($options && $options->show_popup)
+            <livewire:pop-up-card />
+        @endif
         <x-home.navbar :categories="$categories" :carousel="$carousel" />
         <x-home.speed-dial />
         <x-home.carousel :carousel="$carousel" />
