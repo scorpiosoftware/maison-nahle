@@ -109,7 +109,7 @@
                 <!-- Price and Stock -->
                 <div class="mb-6">
                     <div class="flex items-center gap-4 mb-3">
-                        @if ($record->offer_price)
+                        @if ($record->offer_price > 0)
                             <span class="text-3xl font-bold text-gray-900">
                                 {{ session('lang') == 'en' ? '$' : '$' }} {{ number_format($record->offer_price) }}
                             </span>

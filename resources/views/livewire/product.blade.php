@@ -143,7 +143,7 @@
 
         <!-- Pricing -->
         <div class="flex items-center gap-2 mb-4">
-            @if (!empty($item->offer_price))
+            @if (!empty($item->offer_price) && $item->offer_price > 0)
                 <span class="text-lg font-bold text-gray-900">
                     {{ session('lang') == 'en' ? '$' : '$' }} {{ $item->getFormattedOfferPrice() }}
                 </span>

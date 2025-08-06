@@ -259,7 +259,7 @@
                     <label for="price"
                         class="block mb-2 text-sm font-medium text-gray-900  d:text-white">{{ session('lang') == 'en' ? 'price' : 'السعر' }}</label>
 
-                    <input type="number" id="price" value="" name="price" step=".01"
+                    <input type="number" id="price" value="0.0" name="price" step=".01"
                         class="bg-gray-50 h-12 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 d:bg-gray-700 d:border-gray-600 d:placeholder-gray-400 d:text-white d:focus:ring-blue-500 d:focus:border-blue-500"
                         placeholder="" required />
                 </div>
@@ -267,7 +267,7 @@
                     <label for="offer_price"
                         class="block mb-2 text-sm font-medium text-gray-900  d:text-white">{{ session('lang') == 'en' ? 'offer price' : 'سعر بعد الحسم' }}</label>
 
-                    <input type="number" id="offer_price" value="" name="offer_price" step=".01"
+                    <input type="number" id="offer_price" value="0.0" name="offer_price" step=".01"
                         class="bg-gray-50 h-12 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 d:bg-gray-700 d:border-gray-600 d:placeholder-gray-400 d:text-white d:focus:ring-blue-500 d:focus:border-blue-500"
                         placeholder="" />
                 </div>

@@ -160,7 +160,7 @@
                     <!-- Pricing - More emphasis and responsive -->
                     <div class="mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                            @if($product->offer_price)
+                            @if($product->offer_price > 0)
                                 <div class="flex flex-col">
                                     <span class="text-xl sm:text-2xl font-bold text-black">
                                         {{ session('lang') == 'en' ? '$' : '$' }} {{ $product->getFormattedOfferPrice() }}
