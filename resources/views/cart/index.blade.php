@@ -21,11 +21,15 @@
                                                 src="{{ URL::to('storage/' . $details['photo']) }}" alt="imac image" />
                                         </a>
                                         <div class="flex items-center justify-between md:order-3 md:justify-end">
-
+                                            <div class="text-end md:order-4 md:w-32">
+                                                <p class="text-base font-bold text-gray-900 dark:text-white">
+                                                    quantity : {{ $details['quantity'] }}</p>
+                                            </div>
                                             <div class="text-end md:order-4 md:w-32">
                                                 <p class="text-base font-bold text-gray-900 dark:text-white">
                                                     $ {{ $details['price'] }}</p>
                                             </div>
+
                                         </div>
 
                                         <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
@@ -128,7 +132,7 @@
                                     {{ session('lang') == 'en'
                                         ? 'continue shopping'
                                         : '
-                                    مواصلة التسوق' }}
+                                                                        مواصلة التسوق' }}
                                     <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

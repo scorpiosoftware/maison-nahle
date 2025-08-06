@@ -13,7 +13,7 @@
             <button type="button" data-drawer-hide="filter-drawer" aria-controls="filter-drawer"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
                 <span class="sr-only">Close filter</span>
             </button>
@@ -24,13 +24,14 @@
             <form action="{{ route('filter.products') }}" method="POST">
                 @csrf
                 @method('POST')
-                
+
                 <!-- Sort By Section -->
                 <div class="bg-gray-50 rounded-lg p-4">
                     <label class="block text-sm font-medium text-gray-900 mb-2">
                         {{ session('lang') == 'en' ? 'Sort By' : 'ترتيب' }}
                     </label>
-                    <select name="sorting" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm">
+                    <select name="sorting"
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm">
                         <option value="asc">{{ session('lang') == 'en' ? 'Ascending' : 'تصاعدي' }}</option>
                         <option value="desc" @if (request()->input('sorting') == 'desc') selected @endif>
                             {{ session('lang') == 'en' ? 'Descending' : 'تنازلي' }}
@@ -51,16 +52,17 @@
                     </h6>
                     <div class="space-y-2 max-h-32 overflow-y-auto">
                         @foreach ($categories as $cat)
-                            <label class="flex items-center cursor-pointer">
-                                <input type="checkbox" value="{{ $cat->id }}" name="categories[]"
+                            <label
+                                class="flex items-center cursor-pointer border transition-all duration-300 hover:underline">
+                                {{-- <input type="checkbox" value="{{ $cat->id }}" name="categories[]"
                                     class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded focus:ring-gray-900 focus:ring-2"
-                                    @if (!empty(request()->input('categories'))) 
-                                        @foreach (request()->input('categories') as $index)
+                                    @if (!empty(request()->input('categories'))) @foreach (request()->input('categories') as $index)
                                             @if ($index == $cat->id) checked @break @endif
-                                        @endforeach
-                                    @endif>
+                                    @endforeach
+                        @endif> --}}
                                 <span class="ml-2 text-sm text-gray-700">
-                                    {{ session('lang') == 'en' ? $cat->name_en : $cat->name_ar }}
+                                    <a
+                                        href="/catalog/categories/{{ Str::slug($cat->name_en) }}">{{ session('lang') == 'en' ? $cat->name_en : $cat->name_ar }}</a>
                                 </span>
                             </label>
                         @endforeach
@@ -74,16 +76,17 @@
                     </h6>
                     <div class="space-y-2 max-h-32 overflow-y-auto">
                         @foreach ($brands as $brand)
-                            <label class="flex items-center cursor-pointer">
-                                <input type="checkbox" value="{{ $brand->id }}" name="brands[]"
+                            <label
+                                class="flex items-center cursor-pointer border transition-all duration-300 hover:underline">
+                                {{-- <input type="checkbox" value="{{ $brand->id }}" name="brands[]"
                                     class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded focus:ring-gray-900 focus:ring-2"
-                                    @if (!empty(request()->input('brands'))) 
-                                        @foreach (request()->input('brands') as $b)
+                                    @if (!empty(request()->input('brands'))) @foreach (request()->input('brands') as $b)
                                             @if ($b == $brand->id) checked @break @endif
-                                        @endforeach
-                                    @endif>
+                                    @endforeach
+                        @endif> --}}
                                 <span class="ml-2 text-sm text-gray-700">
-                                    {{ session('lang') == 'en' ? $brand->name_en : $brand->name_ar }}
+                                    <a href="/catalog/brands/{{ Str::slug($brand->name_en) }}">
+                                        {{ session('lang') == 'en' ? $brand->name_en : $brand->name_ar }}</a>
                                 </span>
                             </label>
                         @endforeach
@@ -93,41 +96,63 @@
                 <!-- Stores Section -->
                 <div class="bg-gray-50 rounded-lg p-4">
                     <h6 class="text-sm font-medium text-gray-900 mb-3">
-                        {{ session('lang') == 'en' ? 'Stores' : 'المتاجر' }}
+                        {{ session('lang') == 'en' ? 'Sections' : 'المتاجر' }}
                     </h6>
                     <div class="space-y-2 max-h-32 overflow-y-auto">
                         @foreach ($sections as $section)
-                            <label class="flex items-center cursor-pointer">
-                                <input type="checkbox" value="{{ $section->id }}" name="sections[]"
+                            <label
+                                class="flex items-center cursor-pointer border transition-all duration-300 hover:underline">
+                                {{-- <input type="checkbox" value="{{ $section->id }}" name="sections[]"
                                     class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded focus:ring-gray-900 focus:ring-2"
-                                    @if (!empty(request()->input('sections'))) 
-                                        @foreach (request()->input('sections') as $b)
+                                    @if (!empty(request()->input('sections'))) @foreach (request()->input('sections') as $b)
                                             @if ($b == $section->id) checked @break @endif
-                                        @endforeach
-                                    @endif>
+                                    @endforeach
+                        @endif> --}}
                                 <span class="ml-2 text-sm text-gray-700">
-                                    {{ session('lang') == 'en' ? $section->name : $section->name_ar }}
+                                    <a
+                                        href="/catalog/sections/{{ Str::slug($section->name) }}">{{ session('lang') == 'en' ? $section->name : $section->name_ar }}</a>
                                 </span>
                             </label>
                         @endforeach
                     </div>
                 </div>
-
-                <!-- Branches Section -->
                 <div class="bg-gray-50 rounded-lg p-4">
+                    <h6 class="text-sm font-medium text-gray-900 mb-3">
+                        {{ session('lang') == 'en' ? 'Branches' : 'الاقسام' }}
+                    </h6>
+                    <div class="space-y-2 max-h-32 overflow-y-auto ">
+                        @foreach ($branches as $branch)
+                            <label
+                                class="flex items-center cursor-pointer border transition-all duration-300 hover:underline">
+                                {{-- <input type="checkbox" value="{{ $branch->id }}" name="branch"
+                                    class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded focus:ring-gray-900 focus:ring-2"
+                                    @if (!empty(request()->input('sections'))) @foreach (request()->input('sections') as $b)
+                                            @if ($b == $branch->id) checked @break @endif
+                                    @endforeach
+                        @endif> --}}
+                                <span class="ml-2 text-sm text-gray-700">
+                                    <a href="/catalog/branches/{{ Str::slug($branch->name) }}">
+                                        {{ session('lang') == 'en' ? $branch->name : $branch->name_ar }}</a>
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+                <!-- Branches Section -->
+                {{-- <div class="bg-gray-50 rounded-lg p-4">
                     <label class="block text-sm font-medium text-gray-900 mb-2">
                         {{ session('lang') == 'en' ? 'Branches' : 'الاقسام' }}
                     </label>
-                    <select name="branch" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm">
+                    <select name="branch"
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm">
                         <option value="">{{ session('lang') == 'en' ? 'All Branches' : 'جميع الاقسام' }}</option>
                         @foreach ($branches as $branch)
-                            <option value="{{ $branch->id }}"
-                                @if (!empty(request()->input('branch')) && request()->input('branch') == $branch->id) selected @endif>
+                            <option value="{{ $branch->id }}" @if (!empty(request()->input('branch')) && request()->input('branch') == $branch->id) selected @endif>
                                 {{ session('lang') == 'en' ? $branch->name : $branch->name_ar }}
                             </option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 <!-- Price Range Section -->
                 <div class="bg-gray-50 rounded-lg p-4">
@@ -162,7 +187,7 @@
                         class="flex-1 bg-gray-900 text-white py-3 px-4 rounded-md font-medium hover:bg-gray-800 transition-colors duration-200">
                         {{ session('lang') == 'en' ? 'Apply Filters' : 'تطبيق التصفية' }}
                     </button>
-                    <a href="{{ route('shop.index') }}" 
+                    <a href="{{ route('shop.index') }}"
                         class="flex-1 bg-gray-100 text-gray-700 py-3 px-4 rounded-md font-medium hover:bg-gray-200 transition-colors duration-200 text-center">
                         {{ session('lang') == 'en' ? 'Clear' : 'مسح' }}
                     </a>
@@ -191,7 +216,7 @@
                         ],
                     ]">
                 </div>
-                
+
                 <!-- Filter Button and Results Count -->
                 <div class="pb-4 flex items-center justify-between">
                     <button
@@ -199,13 +224,14 @@
                         type="button" data-drawer-target="filter-drawer" data-drawer-show="filter-drawer"
                         data-drawer-backdrop="false" aria-controls="filter-drawer">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z" />
                         </svg>
                         {{ session('lang') == 'en' ? 'Filter Products' : 'تصفية المنتجات' }}
                     </button>
-                    
+
                     <div class="text-sm text-gray-500">
-                        {{ session('lang') == 'en' ? 'Showing' : 'عرض' }} 
+                        {{ session('lang') == 'en' ? 'Showing' : 'عرض' }}
                         <span class="font-medium text-gray-900">{{ $products->count() }}</span>
                         {{ session('lang') == 'en' ? 'products' : 'منتج' }}
                     </div>
@@ -219,7 +245,8 @@
                 <div class="text-center py-16">
                     <div class="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                         <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
                     <h3 class="text-lg font-medium text-gray-900 mb-2">
@@ -260,17 +287,21 @@
             scrollbar-width: thin;
             scrollbar-color: #d1d5db #f3f4f6;
         }
+
         .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f3f4f6;
             border-radius: 2px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #d1d5db;
             border-radius: 2px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #9ca3af;
         }

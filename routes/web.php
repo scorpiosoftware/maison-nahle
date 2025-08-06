@@ -23,9 +23,15 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StoreSectionController;
 use App\Http\Controllers\WishlistController;
+use App\Models\Branch;
+use App\Models\Brand;
 use App\Models\Carousel;
+use App\Models\Category;
+use App\Models\Color;
 use App\Models\Inbox;
+use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\StoreSections;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -35,13 +41,13 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/lang/{locale}', function (string $locale) {
     session()->forget('lang');
     session()->put('lang', $locale);
-   
+
     App::setLocale(session('lang'));
     return redirect()->back();
 });
 
 Route::group(['prefix' => ''], function () {
- 
+
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('shop', ShopController::class);
     Route::get('/shop/{id}/{slug}', [ShopController::class, 'show'])
@@ -60,10 +66,84 @@ Route::group(['prefix' => ''], function () {
         $categories = ListCategory::execute();
         return view('support.privacy', compact('categories', 'carousel'));
     });
-        Route::get('/terms-conditions', function () {
+    Route::get('/terms-conditions', function () {
         $carousel = Carousel::with('images')->first();
         $categories = ListCategory::execute();
         return view('support.terms', compact('categories', 'carousel'));
+    });
+});
+
+Route::group(['prefix' => 'catalog'], function () {
+    Route::get('categories/{slug}', function ($slug) {
+
+
+        $categories = ListCategory::execute();
+
+
+        // Find category by slug
+        $category = Category::all()->first(function ($cat) use ($slug) {
+            return Str::slug($cat->name_en) === $slug;
+        });
+
+        // Get products related to this category
+        $products = Product::whereHas('categories', function ($query) use ($category) {
+            $query->where('categories.id', $category->id);
+        })->paginate(10);
+        $brands = Brand::all();
+        $sections = StoreSections::all();
+        $branches = Branch::all();
+        $colors = Color::all();
+        $carousel = Carousel::with('images')->first();
+        return view('shop.index', compact('categories', 'brands', 'carousel', 'sections', 'branches', 'colors', 'products'));
+    });
+    Route::get('sections/{slug}', function ($slug) {
+
+
+        $categories = ListCategory::execute();
+        // Find category by slug
+        $storeSection = StoreSections::all()->first(function ($sec) use ($slug) {
+            return Str::slug($sec->name) === $slug;
+        });
+        // Get products related to this category
+        $products = Product::where('section_id', $storeSection->id)->paginate(10);
+        $brands = Brand::all();
+        $sections = StoreSections::all();
+        $branches = Branch::all();
+        $colors = Color::all();
+        $carousel = Carousel::with('images')->first();
+        return view('shop.index', compact('categories', 'brands', 'carousel', 'sections', 'branches', 'colors', 'products'));
+    });
+    Route::get('branches/{slug}', function ($slug) {
+
+        $categories = ListCategory::execute();
+        // Find category by slug
+        $branch = Branch::all()->first(function ($br) use ($slug) {
+            return Str::slug($br->name) === $slug;
+        });
+        // Get products related to this category
+        $products = Product::where('branch_id', $branch->id)->paginate(10);
+        $brands = Brand::all();
+        $sections = StoreSections::all();
+        $branches = Branch::all();
+        $colors = Color::all();
+        $carousel = Carousel::with('images')->first();
+        return view('shop.index', compact('categories', 'brands', 'carousel', 'sections', 'branches', 'colors', 'products'));
+    });
+    Route::get('brands/{slug}', function ($slug) {
+
+        $categories = ListCategory::execute();
+        // Find category by slug
+        $brand = Brand::all()->first(function ($br) use ($slug) {
+            return Str::slug($br->name_en) === $slug;
+        });
+        // Get products related to this category
+        $products = Product::where('brand_id', $brand->id)->paginate(10);
+        $brands = Brand::all();
+        $sections = StoreSections::all();
+        $branches = Branch::all();
+        $colors = Color::all();
+        $carousel = Carousel::with('images')->first();
+        return view('shop.index', compact('categories', 'brands', 'carousel', 'sections', 'branches', 'colors', 'products'));
     });
 });
 
