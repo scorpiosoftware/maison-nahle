@@ -44,6 +44,7 @@ class ShopController extends Controller
         $inputs = $request->all();
         $comment = new ProductComments();
         $comment->comment = $inputs['comment'];
+        $comment->customer = $inputs['customer'];
         $comment->product_id = $inputs['id'];
         if (!empty($inputs['rate'])) {
             $comment->rate = $inputs['rate'];
