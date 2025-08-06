@@ -1,6 +1,6 @@
 <nav class="bg-white border-b border-gray-200 shadow-sm z-50 wowDiv nav-bar" id="wowDiv"
     data-animation="animate__fadeInDown" data-delay="300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="md:max-w-7xl  mx-auto px-8 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
 
             <!-- Language Switcher - Desktop Only -->
@@ -9,7 +9,7 @@
             </div>
 
             <!-- Logo Section - Centered -->
-            <div class="flex-1  flex justify-center  lg:flex-none lg:justify-start">
+            <div class="flex-1  flex md:justify-center justify-start  lg:flex-none lg:justify-start">
                 <a href="/" class="flex items-center justify-center group">
                     @if ($carousel->logo_url)
                         <div class="h-8 sm:h-10 lg:h-12 w-auto transition-all duration-300 hover:scale-105">
