@@ -174,7 +174,7 @@
                                 </span>
                             @else
                                 <span class="text-xl sm:text-2xl font-bold text-black">
-                                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $product->price }}
+                                    {{ session('lang') == 'en' ? '$' : '$' }} {{ $product->getFormattedPrice() }}
                                 </span>
                             @endif
                         </div>
