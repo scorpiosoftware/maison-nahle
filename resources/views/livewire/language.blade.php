@@ -6,7 +6,7 @@
       code: '{{ session('lang', 'en') }}',
       label: '{{ session('lang') === 'ar' ? 'العربية' : 'English' }}',
       short: '{{ session('lang') === 'ar' ? 'AR' : 'EN' }}',
-      src: '{{ session('lang') === 'ar' ? asset('media/flag/iraq.png') : asset('media/flag/english.png') }}'
+      src: '{{ session('lang') === 'ar' ? asset('media/flag/lebanon-flag.png') : asset('media/flag/english.png') }}'
     }
   }"
   class="relative"
@@ -81,7 +81,7 @@
           code: 'ar', 
           label: 'العربية', 
           short: 'AR',
-          src: '{{ asset('media/flag/iraq.png') }}' 
+          src: '{{ asset('media/flag/lebanon-flag.png') }}' 
         }; 
         open = false
       "
@@ -89,7 +89,7 @@
       :class="{ 'bg-gray-50': selected.code === 'ar' }"
     >
       <div class="w-4 h-4 rounded-sm overflow-hidden flex-shrink-0">
-        <img src="{{ asset('media/flag/iraq.png') }}" alt="العربية" class="w-full h-full object-cover">
+        <img src="{{ asset('media/flag/lebanon-flag.png') }}" alt="العربية" class="w-full h-full object-cover">
       </div>
       <span class="text-sm text-gray-700 group-hover:text-gray-900">العربية</span>
       <div class="ml-auto" x-show="selected.code === 'ar'">
