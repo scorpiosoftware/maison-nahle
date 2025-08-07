@@ -36,8 +36,11 @@
                                             <div class="flex justify-start items-center space-x-2">
                                                 <a href="#"
                                                     class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{ $details['name'] }}</a>
-                                                <div class="px-2 py-2 rounded-full border box-border size-6"
-                                                    style="background-color: {{ $details['color']->hex_code ?? "" }};"></div>
+                                                @if (!empty($details['color']->hex_code))
+                                                    <div class="px-2 py-2 rounded-full border box-border size-6"
+                                                        style="background-color: {{ $details['color']->hex_code ?? '' }};">
+                                                    </div>
+                                                @endif
                                                 <div class=" rounded-full size-6">{{ $details['size']->name }}</div>
                                             </div>
 
@@ -132,7 +135,7 @@
                                     {{ session('lang') == 'en'
                                         ? 'continue shopping'
                                         : '
-                                                                        مواصلة التسوق' }}
+                                                                                                            مواصلة التسوق' }}
                                     <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
