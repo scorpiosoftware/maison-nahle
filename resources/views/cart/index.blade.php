@@ -37,7 +37,7 @@
                                                 <a href="#"
                                                     class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{ $details['name'] }}</a>
                                                 <div class="px-2 py-2 rounded-full border box-border size-6"
-                                                    style="background-color: {{ $details['color']->hex_code }};"></div>
+                                                    style="background-color: {{ $details['color']->hex_code ?? "" }};"></div>
                                                 <div class=" rounded-full size-6">{{ $details['size']->name }}</div>
                                             </div>
 
