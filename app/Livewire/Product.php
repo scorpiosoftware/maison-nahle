@@ -38,12 +38,12 @@ class Product extends Component
         $color = $product->colors->first();
         $size = $product->sizes->first();
 
-        if (!empty($product->offer_price) || $product->offer_price > 0) {
+        if ($product->offer_price > 0) {
             $price = $product->offer_price;
         }
 
         $p_name = session('lang') == 'en' ? $product->name_en : $product->name_ar;
-
+        info($price);
         if (!$cart) {
             $cart = [
                 $id => [
