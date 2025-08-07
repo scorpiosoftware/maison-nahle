@@ -43,7 +43,7 @@ class Product extends Component
         }
 
         $p_name = session('lang') == 'en' ? $product->name_en : $product->name_ar;
-        info($price);
+ 
         if (!$cart) {
             $cart = [
                 $id => [

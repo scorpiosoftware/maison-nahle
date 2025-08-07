@@ -123,7 +123,7 @@
         </div>
 
         <!-- Offer Badge -->
-        @if (!empty($item->offer_price))
+        @if ($item->offer_price > 0)
             <div class="absolute top-3 left-3 bg-black text-white text-xs font-medium px-2 py-1 rounded-full">
                 {{ session('lang') == 'en' ? 'SALE' : 'تخفيض' }}
             </div>
