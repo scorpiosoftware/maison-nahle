@@ -41,7 +41,7 @@
                                                         style="background-color: {{ $details['color']->hex_code ?? '' }};">
                                                     </div>
                                                 @endif
-                                                <div class="w-full rounded-full size-6"> size : {{ $details['size']->name }}</div>
+                                                <div class="text-nowrap rounded-full size-6"> size : {{ $details['size']->name }}</div>
                                             </div>
 
                                             <div class="flex items-center gap-4">
