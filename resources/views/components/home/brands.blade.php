@@ -12,7 +12,7 @@
             @foreach ($brands as $brand)
                 <div class="brand-card w-40 mx-auto opacity-0 transform translate-y-4" 
                     style="animation: fadeInUp 0.6s ease forwards {{ 1 * 0.15 }}s">
-                    <div class="relative overflow-hidden rounded-xl  shadow-lg hover:shadow-xl transition-all duration-300 p-4 bg-gray-500" >
+                    <div class="relative overflow-hidden rounded-xl  shadow-lg hover:shadow-xl transition-all duration-300 p-4 bg-black" >
                         <div class="skeleton-loader absolute inset-0 bg-gray-200 dark:bg-gray-700"></div>
                         <div class="aspect-square w-full h-full  flex items-center justify-center">
                             <div class="relative flex items-center justify-center">

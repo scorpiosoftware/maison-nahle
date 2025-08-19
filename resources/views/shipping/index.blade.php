@@ -132,6 +132,32 @@
                         </div>
                     </div>
 
+                    <!-- Important Notice -->
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50 p-6">
+                        <div class="flex items-start space-x-3 rtl:space-x-reverse">
+                            <div class="flex-shrink-0">
+                                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                @if(session('lang') == 'en')
+                                    <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-2">Important Notice</h3>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed">
+                                        <p>Please make sure your details are correct. Our team will contact you via <span class="font-medium text-green-600 dark:text-green-400">WhatsApp</span> to confirm your order and preferred payment method (Cash on Delivery or Bank Transfer).</p>
+                                        <p class="italic">We ensure a secure shopping experience and fast delivery within Lebanon, with international shipping available upon request.</p>
+                                    </div>
+                                @else
+                                    <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-2" dir="rtl">ملاحظة مهمة قبل الإرسال</h3>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed" dir="rtl">
+                                        <p>يُرجى التأكد من صحة المعلومات أعلاه. سيتم التواصل معك عبر <span class="font-medium text-green-600 dark:text-green-400">واتساب</span> لتأكيد الطلب وطريقة الدفع المناسبة (الدفع عند الاستلام أو التحويل الإلكتروني).</p>
+                                        <p class="italic">نحن نضمن لك تجربة تسوق آمنة وتوصيل سريع إلى باب منزلك داخل لبنان، مع إمكانية الشحن الدولي حسب الوجهة.</p>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Submit Button -->
                     <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
                         <div class="flex justify-center md:justify-end">
