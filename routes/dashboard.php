@@ -40,7 +40,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::delete('/branch/{id}/delete', [BranchController::class, 'destroy']);
 
     Route::get('/ads', function () {
-        
+
         return view('dashboard.ads.index');
     })->name('ads.index');
+
+    Route::get('/reviews', function () {
+        return view('dashboard.review.index');
+    })->name('reviews.index');
 });
