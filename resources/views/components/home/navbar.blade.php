@@ -9,7 +9,7 @@
             </div>
 
             <!-- Logo Section - Centered -->
-            <div class="flex-1  flex md:justify-center justify-start  lg:flex-none lg:justify-start">
+            <div class="flex-1 flex md:justify-center justify-start  lg:flex-none lg:justify-start">
                 <a href="/" class="flex items-center justify-center group">
                     @if ($carousel->logo_url)
                         <div class="h-8 sm:h-10 lg:h-12 w-auto transition-all duration-300 hover:scale-105">

@@ -33,17 +33,18 @@
 <body class="font-sans antialiased" dir="{{ session('lang') == 'ar' ? 'rtl' : 'ltr' }}">
     {{-- <div data-wow-duration="2s" data-wow-iteration="100" class="wow bounce">bounce</div> --}}
     <livewire:add-item-message>
-    <x-home.speed-dial />
-    <x-home.navbar :categories="$categories" :carousel="$carousel"  />
-    <main>
-        @yield('content')
-        <br>
-        <br>
-        <x-home.footer :carousel="$carousel"/>
-        <x-section.scripts />
-        @stack('scripts')
-    </main>
-    @livewireScripts
+        <x-home.speed-dial />
+        @livewire('dress-rental-label')
+        <x-home.navbar :categories="$categories" :carousel="$carousel" />
+        <main>
+            @yield('content')
+            <br>
+            <br>
+            <x-home.footer :carousel="$carousel" />
+            <x-section.scripts />
+            @stack('scripts')
+        </main>
+        @livewireScripts
 </body>
 
 </html>
