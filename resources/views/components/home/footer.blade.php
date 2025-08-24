@@ -15,8 +15,7 @@
                                     class="w-1/2 mx-auto object-cover">
                             </div>
                         @else
-                            <span
-                                class="text-xl font-bold tracking-tight transition-colors group-hover:text-gray-700">
+                            <span class="text-xl font-bold tracking-tight transition-colors group-hover:text-gray-700">
                                 {{ session('lang') == 'en' ? env('APP_NAME') : env('APP_NAME_AR') }}
                             </span>
                         @endif
@@ -32,13 +31,11 @@
                         <h2 class="mb-6 text-sm font-semibold text-black uppercase tracking-wider">
                             {{ session('lang') == 'en' ? 'Support' : 'الدعم' }}</h2>
                         <ul class="text-black font-medium space-y-3">
-                            <li
-                                class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
+                            <li class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
                                 <a href="/about"
                                     class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'About us' : 'حول الشركة' }}</a>
                             </li>
-                            <li
-                                class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
+                            <li class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
                                 <a href="/contactUs"
                                     class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'Contact Us' : 'تواصل معنا' }}</a>
                             </li>
@@ -50,15 +47,17 @@
                         <h2 class="mb-6 text-sm font-semibold uppercase text-black tracking-wider">
                             {{ session('lang') == 'en' ? 'Legal' : 'القوانين' }}</h2>
                         <ul class="text-black font-medium space-y-3">
-                            <li
-                                class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
+                            <li class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
                                 <a href="/privacy-policy"
                                     class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'Privacy Policy' : 'سياسة الخصوصية' }}</a>
                             </li>
-                            <li
-                                class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
+                            <li class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
                                 <a href="/terms-conditions"
                                     class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'Terms & Conditions' : 'الشروط والأحكام' }}</a>
+                            </li>
+                            <li class="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md transition-all duration-300 ">
+                                <a href="/shipping-payment"
+                                    class="text-black transition-colors duration-300">{{ session('lang') == 'en' ? 'Shipping & Payment' : 'الشحن و الدفع' }}</a>
                             </li>
                         </ul>
                     </div>
@@ -71,14 +70,12 @@
                                 class="inline-block ml-2 transition-transform duration-300 group-hover:rotate-180">▼</span> --}}
                         </h2>
                         <div
-                            class=" w-full   transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0 z-0
-                              ">
+                            class="w-full transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0 z-0">
                             <ul
                                 class="text-black flex flex-wrap font-medium bg-white/90 backdrop-blur-sm justify-start items-center p-4 rounded-xl gap-4 ">
                                 @foreach ($socials as $social)
                                     <li class="transform transition-all duration-300 hover:scale-110">
-                                        <a href="{{ $social->url }}" target="_blank"
-                                            class="block">
+                                        <a href="{{ $social->url }}" target="_blank" class="block">
                                             <img src="{{ asset('storage/' . $social->icon) }}"
                                                 alt="{{ $social->name }} icon" class="w-8 h-8">
                                         </a>
@@ -92,7 +89,7 @@
         </div>
         <hr class="my-6 border-gray-300 sm:mx-auto lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
-           <span class="text-sm text-black/90 sm:text-center hover:text-black transition-colors duration-300">
+            <span class="text-sm text-black/90 sm:text-center hover:text-black transition-colors duration-300">
                 © {{ date('Y') }} <a href=""
                     class="hover:text-gray-700 transition-colors duration-300">ScorpioSoftware™</a>. All Rights
                 Reserved.

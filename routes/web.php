@@ -76,6 +76,11 @@ Route::group(['prefix' => ''], function () {
         $categories = ListCategory::execute();
         return view('support.about', compact('categories', 'carousel'));
     });
+        Route::get('/shipping-payment', function () {
+        $carousel = Carousel::with('images')->first();
+        $categories = ListCategory::execute();
+        return view('support.shipping-payment', compact('categories', 'carousel'));
+    });
 });
 
 Route::group(['prefix' => 'catalog'], function () {
