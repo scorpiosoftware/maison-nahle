@@ -61,7 +61,7 @@ class ListProduct {
             $records = $records->orderBy('id','DESC');
         }
         
-        $records = $records->paginate(5);
+        $records = $records->paginate(20);
         return $records;
     }
 }
