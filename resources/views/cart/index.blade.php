@@ -20,37 +20,36 @@
                                             <img class="box-content object-cover size-60 mx-auto transition-all delay-0 hover:scale-95 dark:hidden"
                                                 src="{{ URL::to('storage/' . $details['photo']) }}" alt="imac image" />
                                         </a>
-                                        <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                            <div class="text-end md:order-4 md:w-32">
-                                                <p class="text-base font-bold text-gray-900 dark:text-white">
-                                                    quantity : {{ $details['quantity'] }}</p>
-                                            </div>
-                                            <div class="text-end md:order-4 md:w-32">
-                                                <p class="text-base font-bold text-gray-900 dark:text-white">
-                                                    $ {{ $details['price'] }}</p>
-                                            </div>
-
-                                        </div>
-
+                                        
                                         <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                            <div class="flex justify-start items-center space-x-2">
-                                                <a href="#"
-                                                    class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{ $details['name'] }}</a>
-                                                <div class="w-full">
-                                                    @if (!empty($details['color']?->hex_code))
-                                                       Color :
-                                                        <span class="ml-2 px-3.5 py-1 rounded-full "
-                                                            style="background-color: {{ $details['color']->hex_code ?? '' }};">
-                                                </span>
-                                                    @endif
-                                                    @if (!empty($details['size']?->name))
-                                                        <div class="text-nowrap rounded-full size-6"> size :
-                                                            {{ $details['size']?->name }}</div>
-                                                    @endif
-                                                </div>
-
+                                            {{-- Product Name --}}
+                                            <a href="#"
+                                                class="text-base font-medium text-gray-900 hover:underline dark:text-white block">
+                                                {{ $details['name'] }}
+                                            </a>
+                                            
+                                            {{-- Color and Size - Better organized --}}
+                                            <div class="flex flex-wrap items-center gap-4">
+                                                @if (!empty($details['color']?->hex_code))
+                                                    <div class="flex items-center gap-2">
+                                                        <span class="text-sm text-gray-600 dark:text-gray-400">Color:</span>
+                                                        <span class="w-6 h-6 rounded-full border border-gray-300"
+                                                            style="background-color: {{ $details['color']->hex_code }};">
+                                                        </span>
+                                                    </div>
+                                                @endif
+                                                
+                                                @if (!empty($details['size']?->name))
+                                                    <div class="flex items-center gap-2">
+                                                        <span class="text-sm text-gray-600 dark:text-gray-400">Size:</span>
+                                                        <span class="text-sm font-medium text-gray-900 dark:text-white">
+                                                            {{ $details['size']->name }}
+                                                        </span>
+                                                    </div>
+                                                @endif
                                             </div>
 
+                                            {{-- Action Buttons --}}
                                             <div class="flex items-center gap-4">
                                                 <button type="button"
                                                     class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
@@ -67,7 +66,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
-                                                        class="inline-flex items-center text-sm font-medium pt-2 text-red-600 hover:underline dark:text-red-500">
+                                                        class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
                                                         <svg class="me-1.5 h-5 w-5" aria-hidden="true"
                                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             fill="none" viewBox="0 0 24 24">
@@ -77,18 +76,29 @@
                                                         </svg>
                                                         {{ session('lang') == 'en' ? 'Remove' : 'حذف' }}
                                                     </button>
-
                                                 </form>
+                                            </div>
+                                        </div>
 
+                                        {{-- Price and Quantity Section --}}
+                                        <div class="flex flex-col items-end justify-center md:order-3 space-y-2">
+                                            <div class="text-end">
+                                                <p class="text-sm text-gray-600 dark:text-gray-400">Quantity</p>
+                                                <p class="text-base font-bold text-gray-900 dark:text-white">
+                                                    {{ $details['quantity'] }}
+                                                </p>
+                                            </div>
+                                            <div class="text-end">
+                                                <p class="text-sm text-gray-600 dark:text-gray-400">Price</p>
+                                                <p class="text-base font-bold text-gray-900 dark:text-white">
+                                                    ${{ $details['price'] }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-
-
                         </div>
-
                     </div>
 
                     {{-- Right Side --}}
@@ -141,8 +151,7 @@
                                     class="inline-flex items-center gap-2 text-sm font-medium text-black underline hover:no-underline">
                                     {{ session('lang') == 'en'
                                         ? 'continue shopping'
-                                        : '
-                                                                                                                                                مواصلة التسوق' }}
+                                        : 'مواصلة التسوق' }}
                                     <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
