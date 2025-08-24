@@ -41,7 +41,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = ListCategory::execute();
-        $sizes = Size::all();
+        $sizes = Size::orderBy('name', 'asc')->get();
         $brands = ListBrand::execute();
         $sections = StoreSections::all();
         $colors = Color::all();
@@ -139,7 +139,7 @@ class ProductController extends Controller
     {
         $record = GetProduct::execute($id);
         $categories = ListCategory::execute();
-        $sizes = Size::all();
+        $sizes = Size::orderBy('name', 'asc')->get();
         $brands = ListBrand::execute();
         $sections = StoreSections::all();
         $branches = Branch::all();
@@ -173,14 +173,14 @@ class ProductController extends Controller
         if ($request->has('sizes')) {
             $record->sizes()->detach();
             $record->sizes()->attach($inputs['sizes']);
-        }else{
+        } else {
             $record->sizes()->detach();
         }
-        
+
         if ($request->has('colors')) {
             $record->colors()->detach();
             $record->colors()->attach($inputs['colors']);
-        }else{
+        } else {
             $record->colors()->detach();
         }
 

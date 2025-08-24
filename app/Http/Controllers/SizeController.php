@@ -12,7 +12,7 @@ class SizeController extends Controller
      */
     public function index()
     {
-        $records = Size::all();
+        $records = Size::OrderBy('name','asc')->get();
         return view('dashboard.Size.index',compact('records'));
     }
 

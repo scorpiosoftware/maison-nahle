@@ -101,7 +101,7 @@ class Product extends Model
 
     public function sizes() : BelongsToMany
     {
-        return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id');
+        return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id')->orderBy('name', 'asc');
     }
 
     public function brand()
