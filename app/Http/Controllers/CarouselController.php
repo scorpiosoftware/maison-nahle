@@ -103,7 +103,7 @@ class CarouselController extends Controller
 
                 // The public URL would be accessible at /storage/carousel/{id}/{filename}
                 $publicUrl = $storagePath . '/' . $filename;
-                info($publicUrl);
+
 
                 $image->url = $publicUrl;
                 $image->carousel_id = $record->id;

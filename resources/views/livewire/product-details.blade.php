@@ -262,7 +262,7 @@
                 }
             });
         });
-       
+
         window.addEventListener('toast:removed', event => {
             const detail = event.detail[0];
 
@@ -338,58 +338,64 @@
             border-radius: 0 0 12px 12px !important;
         }
     </style>
-    <!-- Color and Size Selection Section -->
-    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Color Selection -->
-            <div class="space-y-4">
-                <h3 class="text-lg font-semibold text-[#2B3467]">
-                    {{ session('lang') == 'en' ? 'Pick Color' : 'اختر اللون' }}
-                </h3>
-                <div class="flex flex-wrap gap-3">
-                    @foreach ($record->colors as $color)
-                        <div class="relative">
-                            <input type="radio" wire:model.live="selectedColor" name="color_selection"
-                                value="{{ $color->id }}" id="color_{{ $color->id }}" required
-                                class="peer sr-only" />
-                            <label for="color_{{ $color->id }}"
-                                class="block w-10 h-10 rounded-full cursor-pointer transition-all duration-300 
+    @if (!empty($record->sizes) && $record->sizes->count() > 0 || !empty($record->colors) && $record->colors->count() > 0)
+        <!-- Color and Size Selection Section -->
+        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                @if(!empty($record->colors) && $record->colors->count() > 0)
+                <!-- Color Selection -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-[#2B3467]">
+                        {{ session('lang') == 'en' ? 'Pick Color' : 'اختر اللون' }}
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach ($record->colors as $color)
+                            <div class="relative">
+                                <input type="radio" wire:model.live="selectedColor" name="color_selection"
+                                    value="{{ $color->id }}" id="color_{{ $color->id }}" required
+                                    class="peer sr-only" />
+                                <label for="color_{{ $color->id }}"
+                                    class="block w-10 h-10 rounded-full cursor-pointer transition-all duration-300 
                                           peer-checked:ring-2 peer-checked:ring-[#2B3467] peer-checked:ring-offset-2
                                           hover:scale-110 hover:shadow-md"
-                                style="background-color: {{ $color->hex_code }}">
-                            </label>
-                        </div>
-                    @endforeach
+                                    style="background-color: {{ $color->hex_code }}">
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+
                 </div>
+                @endif
 
-            </div>
 
-            <!-- Size Selection -->
-            <div class="space-y-4">
-                <h3 class="text-lg font-semibold text-[#2B3467]">
-                    {{ session('lang') == 'en' ? 'Pick Size' : 'اختر قياس' }}
-                </h3>
-                <div class="flex flex-wrap gap-3">
-                    @foreach ($record->sizes as $size)
-                        <div class="relative">
-                            <input type="radio" wire:model.live="selectedSize" name="size_selection"
-                                value="{{ $size->id }}" id="size_{{ $size->id }}" required
-                                class="peer sr-only" />
-                            <label for="size_{{ $size->id }}"
-                                class="flex items-center justify-center w-12 h-12 rounded-lg cursor-pointer
+                @if(!empty($record->sizes) && $record->sizes->count() > 0)
+                <!-- Size Selection -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-[#2B3467]">
+                        {{ session('lang') == 'en' ? 'Pick Size' : 'اختر قياس' }}
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach ($record->sizes as $size)
+                            <div class="relative">
+                                <input type="radio" wire:model.live="selectedSize" name="size_selection"
+                                    value="{{ $size->id }}" id="size_{{ $size->id }}" required
+                                    class="peer sr-only" />
+                                <label for="size_{{ $size->id }}"
+                                    class="flex items-center justify-center w-12 h-12 rounded-lg cursor-pointer
                                           bg-white border-2 border-gray-200 transition-all duration-300
                                           peer-checked:border-gray-500 peer-checked:bg-gray-500 peer-checked:text-white
                                           hover:border-gray-500 hover:shadow-md">
-                                {{ $size->name }}
-                            </label>
-                        </div>
-                    @endforeach
-                </div>
+                                    {{ $size->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
 
+                </div>
+                @endif
             </div>
         </div>
-    </div>
-
+    @endif
 
 
     <!-- Quantity and Add to Cart Section -->

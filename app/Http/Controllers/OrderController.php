@@ -31,6 +31,7 @@ class OrderController extends Controller
             $records =  $records->where('status', $inputs['status']);
         }
         $records = $records->orderBy('id', 'desc')->paginate(10);
+
         return view("dashboard.invoice.index", compact("records", 'inputs'));
     }
 
@@ -41,6 +42,10 @@ class OrderController extends Controller
     {
         $categories = ListCategory::execute();
         $carousel = Carousel::with('images')->first();
+          $cart = session()->get('cart');
+        if (!$cart) {
+            return redirect()->route('home');
+        }
         return view('shipping.index', compact('categories', 'carousel'));
     }
 

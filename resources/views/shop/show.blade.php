@@ -35,7 +35,7 @@
                 }
             }">
                 <!-- Main Image Container -->
-                <div class="relative aspect-square w-full bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 group"
+                <div class="relative aspect-square w-full bg-white rounded-xl overflow-hidden    group"
                     @mousemove="isZoomed && handleMouseMove($event)" @mouseleave="isZoomed = false"
                     @mouseenter="isZoomed = true">
 
@@ -55,8 +55,8 @@
                 </div>
 
                 <!-- Thumbnail Grid -->
-                <div class="mt-6">
-                    <div class="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                <div class="mt-6 ">
+                    <div class="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 gap-3 ">
                         <!-- Main Image Thumbnail -->
                         <button @click="changeImage('{{ URL::to('storage/' . $record->main_image_url) }}')"
                             class="relative aspect-square group cursor-pointer rounded-lg overflow-hidden border-2 transition-all duration-200"
@@ -83,7 +83,7 @@
             </div>
 
             <!-- Product Info Section -->
-            <div class="bg-white rounded-xl p-6 lg:p-8 shadow-sm border border-gray-200">
+            <div class="bg-white rounded-xl p-6 lg:p-8 ">
                 <!-- Product Title -->
                 <h1 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
                     {!! session('lang') == 'en' ? $record->name_en : $record->name_ar !!}
@@ -143,7 +143,7 @@
                     <h3 class="text-lg font-semibold text-gray-900 mb-3">
                         {{ session('lang') == 'en' ? 'Description' : 'وصف' }}
                     </h3>
-                    <div class="prose prose-sm max-w-none text-gray-600">
+                    <div class="prose prose-sm max-w-none text-gray-600" >
                         {!! session('lang') == 'en' ? $record->description_en : $record->description_ar !!}
                     </div>
                 </div>
@@ -218,7 +218,7 @@
                             <input type="text"
                                 class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none mb-4"
                                 name="customer" id="" placeholder="user name" required>
-                            
+
                             <textarea id="comment" name="comment" rows="4"
                                 class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none"
                                 placeholder="{{ session('lang') == 'en' ? 'Share your experience with this product...' : 'شاركنا تجربتك مع هذا المنتج...' }}"

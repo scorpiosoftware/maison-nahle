@@ -21,6 +21,8 @@ use App\Models\StoreSections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 use Symfony\Component\Console\Input\Input;
 
 class ProductController extends Controller
@@ -44,7 +46,7 @@ class ProductController extends Controller
         $sections = StoreSections::all();
         $colors = Color::all();
         $randomCode = Str::random(24);
-        return view("dashboard.product.create", compact('categories', 'brands', 'sections', 'colors', 'sizes','randomCode'));
+        return view("dashboard.product.create", compact('categories', 'brands', 'sections', 'colors', 'sizes', 'randomCode'));
     }
 
     /**
@@ -62,7 +64,7 @@ class ProductController extends Controller
         ]);
 
         $inputs = $request->all();
-
+        $manager = new ImageManager(new Driver());
         $record = StoreProduct::execute($inputs);
         if ($record) {
 
@@ -79,12 +81,19 @@ class ProductController extends Controller
             }
 
             if (!empty($request->file('main_image_url'))) {
-                $main_image = StoreMedia::execute(
-                    $request->file('main_image_url'),
-                    'product/' . $record->id . '/main',
-                    'public'
-                );
-                $record->main_image_url = $main_image;
+                $imagefile = $request->file('main_image_url');
+                $myImage = $manager->read($imagefile->getPathname());
+                $storagePath = 'product/' . $record->id . '/main';
+                $filename = uniqid() . '.webp';
+                $fullStoragePath = storage_path('app/public/' . $storagePath);
+                if (!file_exists($fullStoragePath)) {
+                    mkdir($fullStoragePath, 0755, true);
+                }
+                $myImage->toWebp(85)->save($fullStoragePath . '/' . $filename);
+                $publicUrl = $storagePath . '/' . $filename;
+
+                $inputs['main_image_url'] = $publicUrl;
+                $record->main_image_url = $inputs['main_image_url'];
             }
             $record->save();
 
@@ -92,12 +101,16 @@ class ProductController extends Controller
             if (!empty($request->file('images'))) {
                 foreach ($request->file('images') as $imagefile) {
                     $image = new ProductImage();
-                    $path = StoreMedia::execute(
-                        $imagefile,
-                        'product/' . $record->id . '',
-                        'public'
-                    );
-                    $image->image_url = $path;
+                    $myImage = $manager->read($imagefile->getPathname());
+                    $storagePath = 'product/' . $record->id . '';
+                    $filename = uniqid() . '.webp';
+                    $fullStoragePath = storage_path('app/public/' . $storagePath);
+                    if (!file_exists($fullStoragePath)) {
+                        mkdir($fullStoragePath, 0755, true);
+                    }
+                    $myImage->toWebp(85)->save($fullStoragePath . '/' . $filename);
+                    $publicUrl = $storagePath . '/' . $filename;
+                    $image->image_url = $publicUrl;
                     $image->product_id = $record->id;
                     $image->save();
                 }
@@ -131,7 +144,7 @@ class ProductController extends Controller
         $sections = StoreSections::all();
         $branches = Branch::all();
         $colors = Color::all();
-        return view("dashboard.product.edit", compact("record", "categories","sizes", "brands", 'colors', 'sections', 'branches'));
+        return view("dashboard.product.edit", compact("record", "categories", "sizes", "brands", 'colors', 'sections', 'branches'));
     }
 
     /**
@@ -149,7 +162,8 @@ class ProductController extends Controller
         ]);
 
         $inputs = $request->all();
-
+        // dd($inputs['colors']);
+        $manager = new ImageManager(new Driver());
         $record = Product::find($id);
 
         if ($request->has('categories')) {
@@ -159,21 +173,36 @@ class ProductController extends Controller
         if ($request->has('sizes')) {
             $record->sizes()->detach();
             $record->sizes()->attach($inputs['sizes']);
+        }else{
+            $record->sizes()->detach();
         }
+        
         if ($request->has('colors')) {
             $record->colors()->detach();
             $record->colors()->attach($inputs['colors']);
+        }else{
+            $record->colors()->detach();
         }
 
 
         // add new image and delete old
         if ($request->has('main_image_url')) {
-            $inputs['main_image_url'] = StoreMedia::execute(
-                $request->file('main_image_url'),
-                'product/' . $record->id . '/main',
-                'public'
-            );
+            $imagefile = $request->file('main_image_url');
+            $myImage = $manager->read($imagefile->getPathname());
+
+            $storagePath = 'product/' . $record->id . '/main';
+            $filename = uniqid() . '.webp';
+            $fullStoragePath = storage_path('app/public/' . $storagePath);
+            if (!file_exists($fullStoragePath)) {
+                mkdir($fullStoragePath, 0755, true);
+            }
+            $myImage->toWebp(85)->save($fullStoragePath . '/' . $filename);
+
+
+            $publicUrl = $storagePath . '/' . $filename;
+
             DeleteMedia::execute($record->main_image_url);
+            $inputs['main_image_url'] = $publicUrl;
             $record->main_image_url =  $inputs['main_image_url'];
             $record->save();
         }
@@ -189,12 +218,16 @@ class ProductController extends Controller
             // add other product images
             foreach ($request->file('images') as $imagefile) {
                 $image = new ProductImage();
-                $path = StoreMedia::execute(
-                    $imagefile,
-                    'product/' . $record->id . '',
-                    'public'
-                );
-                $image->image_url = $path;
+                $myImage = $manager->read($imagefile->getPathname());
+                $storagePath = 'product/' . $record->id . '';
+                $filename = uniqid() . '.webp';
+                $fullStoragePath = storage_path('app/public/' . $storagePath);
+                if (!file_exists($fullStoragePath)) {
+                    mkdir($fullStoragePath, 0755, true);
+                }
+                $myImage->toWebp(85)->save($fullStoragePath . '/' . $filename);
+                $publicUrl = $storagePath . '/' . $filename;
+                $image->image_url = $publicUrl;
                 $image->product_id = $record->id;
                 $image->save();
             }

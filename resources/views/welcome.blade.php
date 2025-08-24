@@ -21,7 +21,7 @@
 </head>
 
 <body class="font-sans
-        antialiased">
+        antialiased" dir="{{ session('lang') == 'ar' ? 'rtl' : 'ltr' }}">
 
     <div class="">
         @livewire('ads-modal')

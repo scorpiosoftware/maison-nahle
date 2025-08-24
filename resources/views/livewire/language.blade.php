@@ -19,9 +19,9 @@
     class="group flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-opacity-20 min-w-[80px]"
   >
     <!-- Flag Icon -->
-    <div class="w-4 h-4 rounded-sm overflow-hidden flex-shrink-0">
+    {{-- <div class="w-4 h-4 rounded-sm overflow-hidden flex-shrink-0">
       <img :src="selected.src" :alt="selected.label" class="w-full h-full object-cover">
-    </div>
+    </div> --}}
     
     <!-- Language Code -->
     <span x-text="selected.short" class="text-sm font-medium text-gray-700 group-hover:text-gray-900"></span>
@@ -62,9 +62,9 @@
       class="w-full text-left px-3 py-2.5 hover:bg-gray-50 flex items-center gap-2 transition-colors duration-150 group"
       :class="{ 'bg-gray-50': selected.code === 'en' }"
     >
-      <div class="w-4 h-4 rounded-sm overflow-hidden flex-shrink-0">
+      {{-- <div class="w-4 h-4 rounded-sm overflow-hidden flex-shrink-0">
         <img src="{{ asset('media/flag/english.png') }}" alt="English" class="w-full h-full object-cover">
-      </div>
+      </div> --}}
       <span class="text-sm text-gray-700 group-hover:text-gray-900">English</span>
       <div class="ml-auto" x-show="selected.code === 'en'">
         <svg class="w-3 h-3 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
@@ -88,9 +88,9 @@
       class="w-full text-left px-3 py-2.5 hover:bg-gray-50 flex items-center gap-2 transition-colors duration-150 group"
       :class="{ 'bg-gray-50': selected.code === 'ar' }"
     >
-      <div class="w-4 h-4 rounded-sm overflow-hidden flex-shrink-0">
+      {{-- <div class="w-4 h-4 rounded-sm overflow-hidden flex-shrink-0">
         <img src="{{ asset('media/flag/lebanon-flag.png') }}" alt="العربية" class="w-full h-full object-cover">
-      </div>
+      </div> --}}
       <span class="text-sm text-gray-700 group-hover:text-gray-900">العربية</span>
       <div class="ml-auto" x-show="selected.code === 'ar'">
         <svg class="w-3 h-3 text-gray-900" fill="currentColor" viewBox="0 0 20 20">

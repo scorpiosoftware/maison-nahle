@@ -1,5 +1,4 @@
 <x-app-layout>
-    {{-- <livewire:admin-panel.carousel.carousel-view :record="$record"> --}}
     @if (session()->has('success'))
         <div id="alert-border-3"
             class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 d:text-green-400 d:bg-gray-800 d:border-green-800"
@@ -75,32 +74,56 @@
                                 <input id="multiImageInput" type="file" name="photos[]" multiple
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 d:bg-gray-700 d:border-gray-600 d:placeholder-gray-400 d:text-white d:focus:ring-blue-500 d:focus:border-blue-500">
                             </div>
-                            <!-- Note: Script moved to a separate file or the end of the document -->
                         </div>
                         <div class="flex justify-center items-center md:col-start-1 md:col-end-3">
                             <div aria-controls="gallery" data-collapse-toggle="gallery"
-                                class="cursor-pointer transition-all w-full text-center bg-blue-300 container mx-auto delay-75 hover:scale-95">
+                                class="cursor-pointer transition-all w-full text-center bg-blue-300 container mx-auto delay-75 hover:scale-95 py-2 rounded-lg">
                                 {{ session('lang') == 'en' ? 'Gallery' : 'البوم الصور' }}
                             </div>
                         </div>
                         @if (!empty($record))
-                            <div id="gallery" class="grid md:grid-cols-2  items-center  w-full mx-auto gap-4">
+                            <div id="gallery" class="md:col-start-1 md:col-end-3 w-full mx-auto">
                                 {{-- Main Image --}}
                                 <input class="hidden" type="text" name="image" value="{{ $record->logo_url }}">
+                                
+                                {{-- Logo Section --}}
                                 @if (!empty($record?->logo_url))
-                                    <div class="relative">
-                                        <img class=" object-cover rounded-lg transition-all delay-100 hover:scale-105"
-                                            src="{{ URL::to('storage/' . $record->logo_url) }}" alt="">
+                                    <div class="mb-6">
+                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">{{ session('lang') == 'en' ? 'Logo:' : 'الشعار:' }}</h4>
+                                        <div class="flex justify-center">
+                                            <div class="relative group">
+                                                <img class="w-48 h-32 object-contain bg-gray-50 rounded-lg border shadow-sm transition-transform duration-200 hover:scale-105"
+                                                    src="{{ URL::to('storage/' . $record->logo_url) }}" alt="Logo">
+                                            </div>
+                                        </div>
                                     </div>
                                 @endif
-                                {{-- Other Images --}}
+                                
+                                {{-- Gallery Images --}}
                                 @if (!empty($record?->images))
-                                    @foreach ($record->images as $image)
-                                        <div class="relative">
-                                            <img class=" rounded-lg transition-all delay-100 hover:scale-105"
-                                                src="{{ URL::to('storage/' . $image->url) }}" alt="">
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">
+                                            {{ session('lang') == 'en' ? 'Gallery Images:' : 'صور المعرض:' }}
+                                            <span class="text-sm font-normal text-gray-500">({{ count($record->images) }} {{ session('lang') == 'en' ? 'images' : 'صورة' }})</span>
+                                        </h4>
+                                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                            @foreach ($record->images as $image)
+                                                <div class="relative group">
+                                                    <img class="w-full h-32 object-cover rounded-lg border shadow-sm transition-transform duration-200 hover:scale-105"
+                                                        src="{{ URL::to('storage/' . $image->url) }}" alt="Gallery Image">
+                                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 rounded-lg transition-opacity duration-200 flex items-center justify-center">
+                                                        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                                            <button type="button" class="bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200">
+                                                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                    @endforeach
+                                    </div>
                                 @endif
                             </div>
                         @endif
@@ -110,14 +133,12 @@
             {{--  --}}
             <div class="flex justify-end items-center">
                 <button type="submit"
-                    {{-- onclick="document.getElementById('uploadForm').dispatchEvent(new Event('submit', { cancelable: true }))" --}}
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center d:bg-blue-600 d:hover:bg-blue-700 d:focus:ring-blue-800">{{ session('lang') == 'en' ? 'Submit' : 'حفظ' }}</button>
             </div>
         </form>
 
         <!-- Script moved at the end of the body or in a separate JS file -->
         <script>
-            function imageUploader() {
                 return {
                     compressedFiles: [],
                     init() {
@@ -148,92 +169,6 @@
                                 });
                             }
                         });
-
-                        // form.addEventListener('submit', (e) => {
-                        //     e.preventDefault(); // Prevent native form submission
-                        //     e.stopImmediatePropagation(); // Stop bubbling to avoid double trigger
-
-                        //     // Create a new FormData object
-                        //     const formData = new FormData();
-
-                        //     // Add CSRF token
-                        //     formData.append('_token', document.querySelector('input[name="_token"]').value);
-
-                        //     // Add method PUT
-                        //     formData.append('_method', 'PUT');
-
-                        //     // Add logo file if it exists
-                        //     const logoInput = document.getElementById('logo_url');
-                        //     if (logoInput && logoInput.files.length > 0) {
-                        //         formData.append('logo_url', logoInput.files[0]);
-                        //     }
-
-                        //     // Add the compressed files if they exist
-                        //     if (this.compressedFiles.length > 0) {
-                        //         this.compressedFiles.forEach(file => {
-                        //             formData.append('photos[]', file, file.name);
-                        //         });
-                        //     }
-
-                        //     // Add any hidden inputs (like the image value)
-                        //     const hiddenInputs = form.querySelectorAll(
-                        //         'input[type="hidden"], input[type="text"]:not([type="file"])');
-                        //     hiddenInputs.forEach(input => {
-                        //         if (input.name && input.name !== 'photos[]') {
-                        //             formData.append(input.name, input.value);
-                        //         }
-                        //     });
-
-                        //     // Submit via fetch()
-                        //     // fetch(form.action, {
-                        //     //         method: 'POST',
-                        //     //         body: formData
-                        //     //     })
-                        //     //     .then(async (response) => {
-                        //     //         const contentType = response.headers.get("content-type");
-                        //     //         if (response.ok) {
-                        //     //             if (contentType && contentType.includes("application/json")) {
-                        //     //                 const data = await response.json();
-                        //     //                 console.log("Received JSON response:", data);
-                        //     //                 Swal.fire({
-                        //     //                     icon: 'success',
-                        //     //                     title: 'Upload Successful!',
-                        //     //                     text: 'Images uploaded successfully.'
-                        //     //                 });
-                        //     //                 // Reload the page to show the updated gallery
-                        //     //                 setTimeout(() => {
-                        //     //                     window.location.reload();
-                        //     //                 }, 1500);
-                        //     //             } else {
-                        //     //                 const text = await response.text();
-                        //     //                 console.warn("Received non-JSON response:", text);
-                        //     //                 Swal.fire({
-                        //     //                     icon: 'info',
-                        //     //                     title: 'Upload Done!',
-                        //     //                     text: 'But response is not JSON.'
-                        //     //                 });
-                        //     //                 // Reload the page to show the updated gallery
-                        //     //                 setTimeout(() => {
-                        //     //                     window.location.reload();
-                        //     //                 }, 1500);
-                        //     //             }
-                        //     //         } else {
-                        //     //             const errorText = await response.text();
-                        //     //             throw new Error(errorText || 'Upload failed');
-                        //     //         }
-                        //     //     })
-                        //     //     .catch(error => {
-                        //     //         console.error(error);
-                        //     //         Swal.fire({
-                        //     //             icon: 'error',
-                        //     //             title: 'Upload Failed!',
-                        //     //             text: error.message
-                        //     //         });
-                        //     //     });
-
-                        //     return false; // Prevent fallback
-                        // });
-                    
                     },
 
                     compressImage(file, quality = 0.7) {
@@ -274,7 +209,6 @@
 
                             reader.onerror = () => {
                                 console.error("Error reading file:", file.name);
-                                resolve(null);
                             };
                         });
                     }
@@ -282,6 +216,4 @@
             }
         </script>
     </div>
-
-
 </x-app-layout>

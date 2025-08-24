@@ -47,7 +47,7 @@ class ProductDetails extends Component
         $color = $product->colors->where('id', $this->selectedColor)->first();
         $size = $product->sizes->where('id', $this->selectedSize)->first();
 
-        if (!empty($product->offer_price) || $product->offer_price > 0) {
+        if (!empty($product->offer_price) && $product->offer_price > 0) {
             $price = $product->offer_price;
         }
 
@@ -55,7 +55,7 @@ class ProductDetails extends Component
 
         if (!$cart) {
             $cart = [
-                $this->record->id . $size->id . $color->id => [
+                $this->record->id . $size?->id  . $color?->id => [
                     'product_id' => $this->record->id,
                     "name" => $p_name,
                     "quantity" => (int)$this->quantity,
@@ -80,7 +80,7 @@ class ProductDetails extends Component
             return null;
         }
 
-        $cart[$this->record->id . $size->id . $color->id] = [
+        $cart[$this->record->id . $size?->id . $color?->id] = [
             'product_id' => $this->record->id,
             "name" => $p_name,
             "quantity" => (int)$this->quantity,

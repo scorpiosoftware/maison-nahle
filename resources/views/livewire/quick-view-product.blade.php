@@ -193,7 +193,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
                                 </svg>
                             </button>
-                            <div class="flex-1 sm:flex-none px-4 py-2.5 sm:py-2 text-center border-t border-b border-gray-300 text-gray-900 bg-white font-medium min-w-0">
+                            <div class="flex-1 sm:flex-none px-4 py-1 text-center border-t border-b border-gray-300 text-gray-900 bg-white font-medium min-w-0">
                                 {{ $quantity }}
                             </div>
                             <button wire:click="incrementQuantity"

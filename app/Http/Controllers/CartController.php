@@ -22,6 +22,8 @@ class CartController extends Controller
             foreach (session('cart') as $id => $details) {
                 $totale += $details['price'];
             }
+        }else {
+            return redirect()->route('home');
         }
 
         // return 
