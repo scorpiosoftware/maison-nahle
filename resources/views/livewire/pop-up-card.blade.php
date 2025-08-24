@@ -7,6 +7,12 @@
         @method('POST')
 
         <div class="mb-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                {{ session('lang') == 'en' ? 'Dress Rental Price Filter' : 'فلترة أسعار تأجير الفساتين' }}
+            </h2>
+            <p class="text-lg font-medium text-gray-600 mb-4">
+                {{ session('lang') == 'en' ? 'Find dresses within your budget' : 'ابحث عن الفساتين ضمن ميزانيتك' }}
+            </p>
             <p class="text-2xl font-extrabold text-gray-800 tracking-tight">
                 {{ session('lang') == 'en' ? 'Quick Search' : 'بحث سريع' }}
             </p>
@@ -16,27 +22,27 @@
         <div class="flex justify-between items-center gap-6 mb-8">
             <div class="flex-1">
                 <label for="min_price" class="block mb-2 text-sm font-semibold text-gray-700">
-                    {{ session('lang') == 'en' ? 'Min Price' : 'الحد الأدنى للسعر' }}
+                    {{ session('lang') == 'en' ? 'Min Dress Rental Price' : 'الحد الأدنى لسعر تأجير الفستان' }}
                 </label>
                 <div class="relative">
                     <input type="text" 
                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent placeholder-gray-400 transition-all"
                            name="min_price"
                            id="min_price"
-                           placeholder="{{ session('lang') == 'en' ? '$' : '$' }}">
+                           placeholder="{{ session('lang') == 'en' ? '$/month' : '$/شهر' }}">
                 </div>
             </div>
             
             <div class="flex-1">
                 <label for="max_price" class="block mb-2 text-sm font-semibold text-gray-700">
-                    {{ session('lang') == 'en' ? 'Max Price' : 'الحد الأقصى للسعر' }}
+                    {{ session('lang') == 'en' ? 'Max Dress Rental Price' : 'الحد الأقصى لسعر تأجير الفستان' }}
                 </label>
                 <div class="relative">
                     <input type="text" 
                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent placeholder-gray-400 transition-all"
                            name="max_price"
                            id="max_price"
-                           placeholder="{{ session('lang') == 'en' ? '$' : '$' }}">
+                           placeholder="{{ session('lang') == 'en' ? '$/month' : '$/شهر' }}">
                 </div>
             </div>
         </div>

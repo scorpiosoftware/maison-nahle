@@ -29,6 +29,8 @@
         @if ($options && $options->show_popup)
             <livewire:pop-up-card />
         @endif
+
+        @livewire('dress-rental-label')
         <x-home.navbar :categories="$categories" :carousel="$carousel" />
         <x-home.speed-dial />
         <x-home.carousel :carousel="$carousel" />
