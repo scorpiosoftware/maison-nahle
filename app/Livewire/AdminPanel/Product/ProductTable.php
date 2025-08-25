@@ -5,6 +5,7 @@ namespace App\Livewire\AdminPanel\Product;
 use App\Models\Branch;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\StoreSections;
 use Livewire\Component;
@@ -31,10 +32,16 @@ class ProductTable extends Component
     }
     public function delete($id)
     {
+        
         $record = Product::find($id);
+        $items = OrderItem::where('product_id', $record->id)->get();
+        if ($items->count() <= 0) {
         $record->delete();
 
         $this->dispatch('recordDeleted'); // optional feedback
+        }else{
+            $this->dispatch('cannotDelete');
+        }
     }
     #[\Livewire\Attributes\On('deleteConfirmed')]
     public function deleteConfirmed($id)
@@ -47,10 +54,6 @@ class ProductTable extends Component
             'livewire.admin-panel.product.product-table',
             [
                 'records' => $this->getRecords(['search' => $this->search]),
-                // 'categories' => Category::all(),
-                // 'brands' => Brand::all(),
-                // 'sections' => StoreSections::all(),
-                // 'branches' => Branch::all(),
             ]
         );
     }

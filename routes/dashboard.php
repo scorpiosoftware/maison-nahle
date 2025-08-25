@@ -38,7 +38,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::resource('size', SizeController::class);
     Route::post("/branch/section/{id}", [BranchController::class, 'createWithSection'])->name('branch.createSelectedSection');
     Route::delete('/branch/{id}/delete', [BranchController::class, 'destroy']);
-
+    Route::get('/settings',function(){
+        return view('dashboard.settings.index');
+    })->name('settings.options');
     Route::get('/ads', function () {
 
         return view('dashboard.ads.index');

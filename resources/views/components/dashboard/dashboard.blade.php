@@ -31,8 +31,16 @@
                 </a>
             </div>
 
+
+
             {{-- Right side content --}}
             <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <div class="flex justify-start items-center">
+                    <a href="{{ route('settings.options') }}" class="text-sm font-semibold text-black bg-slate-100 p-1.5 rounded-md">
+                        {{ session('lang') == 'en' ? 'settings' : 'لوحة تحكم الإدارة' }}
+                    </a>
+
+                </div>
                 {{-- Language Switcher --}}
                 <livewire:language>
 
@@ -285,9 +293,12 @@
                         {{ session('lang') == 'en' ? 'Catalog' : 'الكتالوج' }}
                     </span>
                     <svg class="w-4 h-4 transition-transform duration-300 {{ session('lang') == 'ar' ? 'rotate-180' : '' }}"
-                        :class="{ 'rotate-180': open && '{{ session('lang') }}'
-                            === 'en', 'rotate-0': open && '{{ session('lang') }}'
-                            === 'ar' }"
+                        :class="{
+                            'rotate-180': open && '{{ session('lang') }}'
+                            === 'en',
+                            'rotate-0': open && '{{ session('lang') }}'
+                            === 'ar'
+                        }"
                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                         </path>

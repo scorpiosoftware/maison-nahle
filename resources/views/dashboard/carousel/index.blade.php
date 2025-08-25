@@ -15,8 +15,13 @@
     @endif
 
     <div>
-        <div class="text-2xl py-4 font-bold underline text-gray-900 d:text-white">
-            {{ session('lang') == 'en' ? 'Carousel' : 'قائمة الصور' }}</div>
+
+        <div class="py-6 group">
+            <h1
+                class="text-3xl md:text-3xl font-extrabold bg-clip-text text-black bg-gradient-to-r from-blue-500 to-purple-600 inline-block transition-all duration-300 transform group-hover:scale-105 group-hover:translate-y-[-2px]">
+                {{ session('lang') == 'en' ? 'Carousel' : 'قائمة الصور' }}
+            </h1>
+        </div>
         <!-- Breadcrumb -->
         <nav class="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 d:bg-gray-800 d:border-gray-700"
             aria-label="Breadcrumb">
@@ -85,11 +90,12 @@
                             <div id="gallery" class="md:col-start-1 md:col-end-3 w-full mx-auto">
                                 {{-- Main Image --}}
                                 <input class="hidden" type="text" name="image" value="{{ $record->logo_url }}">
-                                
+
                                 {{-- Logo Section --}}
                                 @if (!empty($record?->logo_url))
                                     <div class="mb-6">
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">{{ session('lang') == 'en' ? 'Logo:' : 'الشعار:' }}</h4>
+                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">
+                                            {{ session('lang') == 'en' ? 'Logo:' : 'الشعار:' }}</h4>
                                         <div class="flex justify-center">
                                             <div class="relative group">
                                                 <img class="w-48 h-32 object-contain bg-gray-50 rounded-lg border shadow-sm transition-transform duration-200 hover:scale-105"
@@ -98,24 +104,34 @@
                                         </div>
                                     </div>
                                 @endif
-                                
+
                                 {{-- Gallery Images --}}
                                 @if (!empty($record?->images))
                                     <div>
                                         <h4 class="text-lg font-semibold text-gray-700 mb-3">
                                             {{ session('lang') == 'en' ? 'Gallery Images:' : 'صور المعرض:' }}
-                                            <span class="text-sm font-normal text-gray-500">({{ count($record->images) }} {{ session('lang') == 'en' ? 'images' : 'صورة' }})</span>
+                                            <span
+                                                class="text-sm font-normal text-gray-500">({{ count($record->images) }}
+                                                {{ session('lang') == 'en' ? 'images' : 'صورة' }})</span>
                                         </h4>
                                         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                             @foreach ($record->images as $image)
                                                 <div class="relative group">
                                                     <img class="w-full h-32 object-cover rounded-lg border shadow-sm transition-transform duration-200 hover:scale-105"
-                                                        src="{{ URL::to('storage/' . $image->url) }}" alt="Gallery Image">
-                                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 rounded-lg transition-opacity duration-200 flex items-center justify-center">
-                                                        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                                            <button type="button" class="bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200">
-                                                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                        src="{{ URL::to('storage/' . $image->url) }}"
+                                                        alt="Gallery Image">
+                                                    <div
+                                                        class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 rounded-lg transition-opacity duration-200 flex items-center justify-center">
+                                                        <div
+                                                            class="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                                            <button type="button"
+                                                                class="bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200">
+                                                                <svg class="w-4 h-4 text-gray-600" fill="none"
+                                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                                                    </path>
                                                                 </svg>
                                                             </button>
                                                         </div>
@@ -139,80 +155,80 @@
 
         <!-- Script moved at the end of the body or in a separate JS file -->
         <script>
-                return {
-                    compressedFiles: [],
-                    init() {
-                        const input = document.getElementById('multiImageInput');
-                        const form = document.getElementById('uploadForm');
+            return {
+                compressedFiles: [],
+                init() {
+                    const input = document.getElementById('multiImageInput');
+                    const form = document.getElementById('uploadForm');
 
-                        input.addEventListener('change', async (event) => {
-                            const files = Array.from(event.target.files);
-                            this.compressedFiles = [];
+                    input.addEventListener('change', async (event) => {
+                        const files = Array.from(event.target.files);
+                        this.compressedFiles = [];
 
-                            for (const file of files) {
-                                const compressed = await this.compressImage(file, 0.7);
-                                if (compressed) {
-                                    this.compressedFiles.push(compressed);
-                                } else {
-                                    console.warn("Skipping file due to compression error:", file.name);
-                                }
+                        for (const file of files) {
+                            const compressed = await this.compressImage(file, 0.7);
+                            if (compressed) {
+                                this.compressedFiles.push(compressed);
+                            } else {
+                                console.warn("Skipping file due to compression error:", file.name);
                             }
+                        }
 
-                            if (this.compressedFiles.length > 0) {
-                                Swal.fire({
-                                    toast: true,
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Images compressed successfully',
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                });
-                            }
-                        });
-                    },
+                        if (this.compressedFiles.length > 0) {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Images compressed successfully',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        }
+                    });
+                },
 
-                    compressImage(file, quality = 0.7) {
-                        return new Promise((resolve) => {
-                            const reader = new FileReader();
-                            reader.readAsDataURL(file);
+                compressImage(file, quality = 0.7) {
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
 
-                            reader.onload = (event) => {
-                                const img = new Image();
-                                img.src = event.target.result;
+                        reader.onload = (event) => {
+                            const img = new Image();
+                            img.src = event.target.result;
 
-                                img.onload = () => {
-                                    const canvas = document.createElement('canvas');
-                                    canvas.width = img.width;
-                                    canvas.height = img.height;
+                            img.onload = () => {
+                                const canvas = document.createElement('canvas');
+                                canvas.width = img.width;
+                                canvas.height = img.height;
 
-                                    const ctx = canvas.getContext('2d');
-                                    ctx.drawImage(img, 0, 0);
+                                const ctx = canvas.getContext('2d');
+                                ctx.drawImage(img, 0, 0);
 
-                                    canvas.toBlob((blob) => {
-                                        if (blob) {
-                                            const compressed = new File([blob], file.name, {
-                                                type: file.type,
-                                                lastModified: Date.now()
-                                            });
-                                            resolve(compressed);
-                                        } else {
-                                            resolve(null);
-                                        }
-                                    }, file.type, quality);
-                                };
-
-                                img.onerror = () => {
-                                    console.error("Error loading image:", file.name);
-                                    resolve(null);
-                                };
+                                canvas.toBlob((blob) => {
+                                    if (blob) {
+                                        const compressed = new File([blob], file.name, {
+                                            type: file.type,
+                                            lastModified: Date.now()
+                                        });
+                                        resolve(compressed);
+                                    } else {
+                                        resolve(null);
+                                    }
+                                }, file.type, quality);
                             };
 
-                            reader.onerror = () => {
-                                console.error("Error reading file:", file.name);
+                            img.onerror = () => {
+                                console.error("Error loading image:", file.name);
+                                resolve(null);
                             };
-                        });
-                    }
+                        };
+
+                        reader.onerror = () => {
+                            console.error("Error reading file:", file.name);
+                        };
+                    });
                 }
+            }
             }
         </script>
     </div>

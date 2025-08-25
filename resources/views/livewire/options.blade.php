@@ -35,4 +35,5 @@
             <p class="text-red-800 text-sm">✗ Popup is currently disabled</p>
         </div>
     @endif
+    <livewire:settings-manager>
 </div>
