@@ -36,7 +36,8 @@
             {{-- Right side content --}}
             <div class="flex items-center space-x-4 rtl:space-x-reverse">
                 <div class="flex justify-start items-center">
-                    <a href="{{ route('settings.options') }}" class="text-sm font-semibold text-black bg-slate-100 p-1.5 rounded-md">
+                    <a href="{{ route('settings.options') }}"
+                        class="text-sm font-semibold text-black bg-slate-100 p-1.5 rounded-md">
                         {{ session('lang') == 'en' ? 'settings' : 'لوحة تحكم الإدارة' }}
                     </a>
 
@@ -207,6 +208,26 @@
                 </div>
                 <span
                     class="{{ session('lang') == 'ar' ? 'mr-3' : 'ml-3' }} font-medium">{{ session('lang') == 'en' ? 'Carousel' : 'قائمة الصور' }}</span>
+            </a>
+
+            {{-- Users --}}
+            <a href="{{ route('user.index') }}"
+                class="flex items-center p-3 text-gray-700 rounded-xl hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 hover:text-green-700 transition-all duration-300 group border border-transparent hover:border-green-200/50">
+                <div
+                    class="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 group-hover:from-green-200 group-hover:to-emerald-200 transition-all duration-300">
+                    <svg class="w-5 h-5 text-green-600 group-hover:text-green-700 transition-colors duration-300"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m22 21-3.5-3.5" />
+                        <circle cx="20" cy="8" r="3" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" />
+                    </svg>
+                </div>
+                <span
+                    class="{{ session('lang') == 'ar' ? 'mr-3' : 'ml-3' }} font-medium">{{ session('lang') == 'en' ? 'Users' : 'المستخدمين' }}</span>
             </a>
 
             {{-- Inbox --}}

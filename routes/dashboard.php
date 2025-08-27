@@ -15,6 +15,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\StoreSectionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
     Route::resource('dashboard', DashboardController::class);
+    Route::resource('user', UserController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('brand', BrandController::class);
