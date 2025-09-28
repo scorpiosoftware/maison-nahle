@@ -57,27 +57,27 @@ Route::group(['prefix' => ''], function () {
     Route::post('/contactUs/send', [InboxController::class, 'store'])->name('send-comment');
     Route::post('/shop/send', [ShopController::class, 'addComment'])->name('add-review');
     Route::get('/contactUs', function () {
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         $categories = ListCategory::execute();
         return view('support.contact', compact('categories', 'carousel'));
     });
     Route::get('/privacy-policy', function () {
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         $categories = ListCategory::execute();
         return view('support.privacy', compact('categories', 'carousel'));
     });
     Route::get('/terms-conditions', function () {
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         $categories = ListCategory::execute();
         return view('support.terms', compact('categories', 'carousel'));
     });
     Route::get('/about', function () {
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         $categories = ListCategory::execute();
         return view('support.about', compact('categories', 'carousel'));
     });
         Route::get('/shipping-payment', function () {
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         $categories = ListCategory::execute();
         return view('support.shipping-payment', compact('categories', 'carousel'));
     });
@@ -103,7 +103,7 @@ Route::group(['prefix' => 'catalog'], function () {
         $sections = StoreSections::all();
         $branches = Branch::all();
         $colors = Color::all();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         return view('shop.index', compact('categories', 'brands', 'carousel', 'sections', 'branches', 'colors', 'products'));
     });
     Route::get('sections/{slug}', function ($slug) {
@@ -120,7 +120,7 @@ Route::group(['prefix' => 'catalog'], function () {
         $sections = StoreSections::all();
         $branches = Branch::all();
         $colors = Color::all();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         return view('shop.index', compact('categories', 'brands', 'carousel', 'sections', 'branches', 'colors', 'products'));
     });
     Route::get('branches/{slug}', function ($slug) {
@@ -136,7 +136,7 @@ Route::group(['prefix' => 'catalog'], function () {
         $sections = StoreSections::all();
         $branches = Branch::all();
         $colors = Color::all();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         return view('shop.index', compact('categories', 'brands', 'carousel', 'sections', 'branches', 'colors', 'products'));
     });
     Route::get('brands/{slug}', function ($slug) {
@@ -152,7 +152,7 @@ Route::group(['prefix' => 'catalog'], function () {
         $sections = StoreSections::all();
         $branches = Branch::all();
         $colors = Color::all();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         return view('shop.index', compact('categories', 'brands', 'carousel', 'sections', 'branches', 'colors', 'products'));
     });
 });

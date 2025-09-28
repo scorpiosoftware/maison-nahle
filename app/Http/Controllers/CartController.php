@@ -17,7 +17,7 @@ class CartController extends Controller
         $categories = Category::all();
         $cart = session()->get('cart');
         $totale = 0;
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         if ($cart) {
             foreach (session('cart') as $id => $details) {
                 $totale += $details['price'];

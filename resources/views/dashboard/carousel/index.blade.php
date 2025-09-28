@@ -56,6 +56,50 @@
             @csrf
             @method('PUT')
             <div class="grid gap-6 mb-6 md:grid-cols-1">
+                <!-- Carousel Status Toggle Section -->
+                <div class="grid grid-cols-1 gap-4 border-2 p-4 bg-gray-50 d:bg-gray-800">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 d:text-white">
+                                {{ session('lang') == 'en' ? 'Carousel Status' : 'حالة عرض الصور' }}
+                            </h3>
+                            <p class="text-sm text-gray-500 d:text-gray-400">
+                                {{ session('lang') == 'en' ? 'Enable or disable the carousel display' : 'تفعيل أو إلغاء تفعيل عرض الصور' }}
+                            </p>
+                        </div>
+                        <div class="flex items-center">
+                            <label class="inline-flex relative items-center cursor-pointer">
+                                <input type="checkbox" name="is_enabled" value="1" id="carousel-toggle" 
+                                    class="sr-only peer" 
+                                    {{ (isset($record) && $record->is_enable) || old('is_enabled') ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 d:peer-focus:ring-blue-800 rounded-full peer d:bg-gray-700 peer-checked:after:translate-x-10 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[-15px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all d:border-gray-600 peer-checked:bg-blue-600"></div>
+                                <span class="ml-10 text-sm font-medium text-gray-900 d:text-gray-300">
+                                    <span id="toggle-text">
+                                        {{ session('lang') == 'en' ? 'Enabled' : 'مفعل' }}
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Status Indicator -->
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                        <div id="status-indicator" class="flex items-center">
+                            <div class="w-3 h-3 rounded-full mr-2 rtl:mr-0 rtl:ml-2 
+                                {{ (isset($record) && $record->is_enable) || old('is_enabled') ? 'bg-green-500' : 'bg-red-500' }}">
+                            </div>
+                            <span id="status-text" class="text-sm font-medium
+                                {{ (isset($record) && $record->is_enable) || old('is_enabled') ? 'text-green-600' : 'text-red-600' }}">
+                                @if((isset($record) && $record->is_enable) || old('is_enabled'))
+                                    {{ session('lang') == 'en' ? 'Carousel is currently active' : 'عرض الصور مفعل حالياً' }}
+                                @else
+                                    {{ session('lang') == 'en' ? 'Carousel is currently inactive' : 'عرض الصور غير مفعل حالياً' }}
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 gap-4 border-2 p-4 md:grid-cols-2">
                     <div class="grid grid-cols-1 gap-4 border-2 p-4 md:grid-cols-2 md:col-start-1 md:col-end-3">
                         <div class="w-full mt-2">
@@ -149,86 +193,114 @@
             {{--  --}}
             <div class="flex justify-end items-center">
                 <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center d:bg-blue-600 d:hover:bg-blue-700 d:focus:ring-blue-800">{{ session('lang') == 'en' ? 'Submit' : 'حفظ' }}</button>
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center d:bg-blue-600 d:hover:bg-blue-700 d:focus:ring-blue-800">{{ session('lang') == 'en' ? 'save' : 'حفظ' }}</button>
             </div>
         </form>
 
         <!-- Script moved at the end of the body or in a separate JS file -->
         <script>
-            return {
-                compressedFiles: [],
-                init() {
-                    const input = document.getElementById('multiImageInput');
-                    const form = document.getElementById('uploadForm');
-
-                    input.addEventListener('change', async (event) => {
-                        const files = Array.from(event.target.files);
-                        this.compressedFiles = [];
-
-                        for (const file of files) {
-                            const compressed = await this.compressImage(file, 0.7);
-                            if (compressed) {
-                                this.compressedFiles.push(compressed);
-                            } else {
-                                console.warn("Skipping file due to compression error:", file.name);
-                            }
-                        }
-
-                        if (this.compressedFiles.length > 0) {
-                            Swal.fire({
-                                toast: true,
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Images compressed successfully',
-                                showConfirmButton: false,
-                                timer: 2000
-                            });
-                        }
-                    });
-                },
-
-                compressImage(file, quality = 0.7) {
-                    return new Promise((resolve) => {
-                        const reader = new FileReader();
-                        reader.readAsDataURL(file);
-
-                        reader.onload = (event) => {
-                            const img = new Image();
-                            img.src = event.target.result;
-
-                            img.onload = () => {
-                                const canvas = document.createElement('canvas');
-                                canvas.width = img.width;
-                                canvas.height = img.height;
-
-                                const ctx = canvas.getContext('2d');
-                                ctx.drawImage(img, 0, 0);
-
-                                canvas.toBlob((blob) => {
-                                    if (blob) {
-                                        const compressed = new File([blob], file.name, {
-                                            type: file.type,
-                                            lastModified: Date.now()
-                                        });
-                                        resolve(compressed);
-                                    } else {
-                                        resolve(null);
-                                    }
-                                }, file.type, quality);
-                            };
-
-                            img.onerror = () => {
-                                console.error("Error loading image:", file.name);
-                                resolve(null);
-                            };
-                        };
-
-                        reader.onerror = () => {
-                            console.error("Error reading file:", file.name);
-                        };
-                    });
+            // Toggle functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggle = document.getElementById('carousel-toggle');
+                const toggleText = document.getElementById('toggle-text');
+                const statusIndicator = document.querySelector('#status-indicator .w-3');
+                const statusText = document.getElementById('status-text');
+                
+                function updateToggleState(isEnabled) {
+                    if (isEnabled) {
+                        toggleText.textContent = '{{ session('lang') == 'en' ? 'Enabled' : 'مفعل' }}';
+                        statusIndicator.className = statusIndicator.className.replace('bg-red-500', 'bg-green-500');
+                        statusText.className = statusText.className.replace('text-red-600', 'text-green-600');
+                        statusText.textContent = '{{ session('lang') == 'en' ? 'Carousel is currently active' : 'عرض الصور مفعل حالياً' }}';
+                    } else {
+                        toggleText.textContent = '{{ session('lang') == 'en' ? 'Disabled' : 'غير مفعل' }}';
+                        statusIndicator.className = statusIndicator.className.replace('bg-green-500', 'bg-red-500');
+                        statusText.className = statusText.className.replace('text-green-600', 'text-red-600');
+                        statusText.textContent = '{{ session('lang') == 'en' ? 'Carousel is currently inactive' : 'عرض الصور غير مفعل حالياً' }}';
+                    }
                 }
-            }
+                
+                toggle.addEventListener('change', function() {
+                    updateToggleState(this.checked);
+                });
+            });
+
+            // Image uploader functionality
+            function imageUploader() {
+                return {
+                    compressedFiles: [],
+                    init() {
+                        const input = document.getElementById('multiImageInput');
+                        const form = document.getElementById('uploadForm');
+
+                        input.addEventListener('change', async (event) => {
+                            const files = Array.from(event.target.files);
+                            this.compressedFiles = [];
+
+                            for (const file of files) {
+                                const compressed = await this.compressImage(file, 0.7);
+                                if (compressed) {
+                                    this.compressedFiles.push(compressed);
+                                } else {
+                                    console.warn("Skipping file due to compression error:", file.name);
+                                }
+                            }
+
+                            if (this.compressedFiles.length > 0) {
+                                Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Images compressed successfully',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                            }
+                        });
+                    },
+
+                    compressImage(file, quality = 0.7) {
+                        return new Promise((resolve) => {
+                            const reader = new FileReader();
+                            reader.readAsDataURL(file);
+
+                            reader.onload = (event) => {
+                                const img = new Image();
+                                img.src = event.target.result;
+
+                                img.onload = () => {
+                                    const canvas = document.createElement('canvas');
+                                    canvas.width = img.width;
+                                    canvas.height = img.height;
+
+                                    const ctx = canvas.getContext('2d');
+                                    ctx.drawImage(img, 0, 0);
+
+                                    canvas.toBlob((blob) => {
+                                        if (blob) {
+                                            const compressed = new File([blob], file.name, {
+                                                type: file.type,
+                                                lastModified: Date.now()
+                                            });
+                                            resolve(compressed);
+                                        } else {
+                                            resolve(null);
+                                        }
+                                    }, file.type, quality);
+                                };
+
+                                img.onerror = () => {
+                                    console.error("Error loading image:", file.name);
+                                    resolve(null);
+                                };
+                            };
+
+                            reader.onerror = () => {
+                                console.error("Error reading file:", file.name);
+                            };
+                        });
+                    }
+                }
             }
         </script>
     </div>

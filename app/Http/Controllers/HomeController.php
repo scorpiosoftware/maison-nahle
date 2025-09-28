@@ -41,7 +41,7 @@ class HomeController extends Controller
         $perfumes = ListProductsByCategory::execute(category_id: 10);
         $categories = ListCategory::execute();
         $brands = ListBrand::execute();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         $colors = Color::all();
         $productViews = ProductView::where('selected',true)->get();
         return view('welcome', compact('bestSeller','perfumes','categories', 'brands','carousel','productViews','colors'));

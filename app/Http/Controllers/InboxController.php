@@ -26,7 +26,7 @@ class InboxController extends Controller
      */
     public function create()
     {
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         return view("support.contact", compact("carousel"));
     }
 

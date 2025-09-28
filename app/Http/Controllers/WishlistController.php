@@ -16,7 +16,7 @@ class WishlistController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         $productViews = ProductView::where('selected',true)->get();
         return view('wishlist.index',compact('categories','carousel','productViews'));
     }

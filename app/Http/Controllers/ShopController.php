@@ -35,7 +35,7 @@ class ShopController extends Controller
         $sections = StoreSections::all();
         $branches = Branch::all();
         $colors = Color::all();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         return view('shop.index', compact('categories', 'brands', 'inputs', 'carousel', 'sections', 'branches', 'colors', 'products'));
     }
 
@@ -89,7 +89,7 @@ class ShopController extends Controller
 
         $cart = session()->get('cart');
         $categories = Category::all();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
 
         return view("shop.show", compact("record", 'categories', 'cart', 'comments', 'product_rate', 'carousel'));
     }
@@ -128,7 +128,7 @@ class ShopController extends Controller
         $sections = StoreSections::all();
         $colors = Color::all();
         $branches = Branch::all();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
         $request->visit();
         return view('shop.index', compact('categories', 'brands', 'inputs', 'carousel', 'sections', 'branches', 'colors', 'products'));
     }

@@ -41,7 +41,7 @@ class OrderController extends Controller
     public function create()
     {
         $categories = ListCategory::execute();
-        $carousel = Carousel::with('images')->first();
+        $carousel = Carousel::with('images')->where('is_enable',true)->first();
           $cart = session()->get('cart');
         if (!$cart) {
             return redirect()->route('home');
