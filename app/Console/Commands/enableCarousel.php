@@ -29,7 +29,7 @@ class enableCarousel extends Command
         $carousel = \App\Models\Carousel::first();
         
         if ($carousel) {
-            $carousel->enabled = true;
+            $carousel->is_enable = true;
             $carousel->save();
             $this->info('Carousel has been enabled.');
         } else {
